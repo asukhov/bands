@@ -105,7 +105,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 /* ── right: detail panel ───────────────────────────────────── */
 .detail-panel{flex:1;overflow:hidden;opacity:0;transition:opacity .3s ease .1s;display:flex;flex-direction:column;
   background:linear-gradient(135deg,#0a0c14,#0d0f18);min-width:0}
-.detail-panel.open{opacity:1}
+.detail-panel.open,.detail-panel:has(.intro){opacity:1}
+.detail-panel:has(.intro){overflow-y:auto}
 .detail-inner{padding:12px 16px;overflow-y:auto;flex:1;min-height:0}
 .detail-inner::-webkit-scrollbar{width:3px}
 .detail-inner::-webkit-scrollbar-thumb{background:#1e2536;border-radius:2px}
@@ -153,6 +154,18 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
 /* ── placeholder / empty state ─────────────────────────────── */
 .empty-state{flex:1;display:flex;align-items:center;justify-content:center;color:#6a7a8e;font-size:14px;letter-spacing:2px;text-transform:uppercase;user-select:none}
+.empty-state.intro{flex-direction:column;text-transform:none;letter-spacing:0;gap:0;padding:24px;max-width:520px;overflow-y:auto;align-items:center;justify-content:safe center}
+.intro-title{font-size:22px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.intro-wave{font-size:28px;letter-spacing:4px;margin-bottom:16px;opacity:.6;line-height:1}
+.intro-line{font-size:13px;color:#7a8a9e;line-height:1.7;text-align:center}
+.intro-line .key{display:inline-flex;align-items:center;justify-content:center;width:24px;height:22px;background:#1a1f2e;color:#a0b0c8;padding:0;border-radius:4px;font-size:13px;font-weight:600;border:1px solid #2a3040;margin:0 2px;vertical-align:middle;line-height:1}
+.intro-line .accent{color:#00ff88}
+.intro-sep{width:60px;height:1px;background:linear-gradient(90deg,transparent,#2a3548,transparent);margin:10px auto}
+html.light .intro-title{color:#4a5568}
+html.light .intro-line{color:#5a6878}
+html.light .intro-line .key{background:#dce0e8;color:#2a3040;border-color:#c0c8d4}
+html.light .intro-line .accent{color:#00885a}
+html.light .intro-sep{background:linear-gradient(90deg,transparent,#c0c8d4,transparent)}
 
 /* ── well-known frequencies section ────────────────────────── */
 .wkf-section{margin-top:12px;border-top:1px solid #1a1f2e;padding-top:10px}
@@ -344,7 +357,7 @@ html.light .ripple{background:rgba(0,0,0,.08)}
 
     <!-- RIGHT: detail -->
     <div class="detail-panel" id="detailPanel">
-      <div class="empty-state" id="emptyState">← Select a band to begin</div>
+      <div class="empty-state intro" id="emptyState"></div>
       <div class="detail-inner" id="detailInner" style="display:none"></div>
     </div>
 
@@ -1146,6 +1159,7 @@ function toggleTheme(){
 function refreshCurrentView(){
   if(activeSpecial==='glossary') openGlossary();
   else if(activeSpecial==='propagation') openPropagation();
+  else if(!activeBand) showIntro();
   else{
     var band=BANDS.find(function(b){return b.id===activeBand;});
     if(band && activeSub){
@@ -1158,6 +1172,24 @@ function refreshCurrentView(){
 (function initTheme(){
   try{if(localStorage.getItem('rf-theme')==='light') document.documentElement.classList.add('light');}catch(e){}
 })();
+
+function showIntro(){
+  var el=$('#emptyState');
+  el.className='empty-state intro';
+  el.innerHTML=
+    '<div class="intro-wave">〜〜〜 📡 〜〜〜</div>'+
+    '<div class="intro-title" style="color:'+ tc('#33ff88') +'">RF Spectrum Explorer</div>'+
+    '<div class="intro-line">Your pocket guide to <span class="accent">' + BANDS.reduce(function(n,b){return n+b.subs.length;},0) + ' sub‑bands</span> from 15 kHz to 5 GHz.</div>'+
+    '<div class="intro-sep"></div>'+
+    '<div class="intro-line">Pick a band on the left — or just smash the keyboard:</div>'+
+    '<div class="intro-sep"></div>'+
+    '<div class="intro-line"><span class="key">▲</span> <span class="key">▼</span> hop between bands</div>'+
+    '<div class="intro-line"><span class="key">◀</span> <span class="key">▶</span> browse sub‑bands</div>'+
+    '<div class="intro-line"><span class="key">☽</span> toggle in the top‑right for <span class="accent">light mode</span></div>'+
+    '<div class="intro-sep"></div>'+
+    '<div class="intro-line" style="opacity:.5;font-size:12px">Bonus: check out <strong>ABC</strong> (glossary) and <strong>PROP</strong> (propagation maps)</div>';
+}
+showIntro();
 
 /* count total sub-bands */
 const totalSubs = BANDS.reduce((n, b) => n + b.subs.length, 0);
@@ -1218,7 +1250,8 @@ function selectBand(band) {
 
   $('#detailInner').style.display = 'none';
   $('#emptyState').style.display = 'flex';
-  $('#emptyState').textContent = '← Select a sub‑band';
+  $('#emptyState').className = 'empty-state';
+  $('#emptyState').innerHTML = '← Select a sub‑band';
   $('#detailPanel').classList.add('open');
 }
 
