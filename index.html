@@ -25,7 +25,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .top-bar{flex:0 0 32px;display:flex;align-items:center;padding:0 14px;
   background:linear-gradient(90deg,#0c0e16,#10131c);border-bottom:1px solid #1e2536;gap:10px;z-index:10}
 .top-bar .title{font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#00ff88;white-space:nowrap}
-.top-bar .range{font-size:12px;color:#4a5568;letter-spacing:1px}
+.top-bar .range{font-size:12px;color:#9aaabe;letter-spacing:1px}
 .top-bar .dot{width:6px;height:6px;border-radius:50%;background:#00ff88;box-shadow:0 0 6px #00ff88;animation:blink 2s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
@@ -44,7 +44,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
   clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px),0 6px);
   background:linear-gradient(180deg,#151a28 0%,#0f1220 50%,#151a28 100%)}
 .band-btn .label{font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:color .25s}
-.band-btn .freq{font-size:10px;color:#3e4a5e;letter-spacing:.5px;margin-top:1px;transition:color .25s}
+.band-btn .freq{font-size:10px;color:#8a9aae;letter-spacing:.5px;margin-top:1px;transition:color .25s}
 .band-btn:hover{filter:brightness(1.3)}
 .band-btn:hover .label{color:#c0d0e0}
 .band-btn.active{animation:pulse-glow 2.5s ease-in-out infinite}
@@ -90,7 +90,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .sub-panel-inner{display:flex;flex-direction:column;gap:3px;padding:6px;overflow-y:auto;overflow-x:hidden;flex:1;min-height:0}
 .sub-panel-inner::-webkit-scrollbar{width:3px}
 .sub-panel-inner::-webkit-scrollbar-thumb{background:#1e2536;border-radius:2px}
-.sub-panel-header{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#3e4a5e;padding:4px 8px 2px;white-space:nowrap;flex-shrink:0}
+.sub-panel-header{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#9aaabe;padding:4px 8px 2px;white-space:nowrap;flex-shrink:0}
 
 /* sub‑band button */
 .sub-btn{position:relative;padding:5px 8px;cursor:pointer;user-select:none;font-size:13px;font-weight:500;
@@ -99,8 +99,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
   background:linear-gradient(180deg,#13162200,#111420)}
 .sub-btn:hover{background:linear-gradient(180deg,#1a1e30,#151828);color:#a0b0c8}
 .sub-btn.active{color:#fff;background:linear-gradient(180deg,#181e32,#141a2c)}
-.sub-btn .sub-freq{display:block;font-size:11px;color:#3a4658;margin-top:1px;font-weight:400;transition:color .2s}
-.sub-btn.active .sub-freq{color:#5a6a80}
+.sub-btn .sub-freq{display:block;font-size:11px;color:#8a9aae;margin-top:1px;font-weight:400;transition:color .2s}
+.sub-btn.active .sub-freq{color:#a0b0c8}
 
 /* ── right: detail panel ───────────────────────────────────── */
 .detail-panel{flex:1;overflow:hidden;opacity:0;transition:opacity .3s ease .1s;display:flex;flex-direction:column;
@@ -112,14 +112,14 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
 /* detail: header */
 .detail-title{font-size:20px;font-weight:700;letter-spacing:1px;margin-bottom:2px}
-.detail-subtitle{font-size:12px;color:#3e4a5e;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.detail-subtitle{font-size:12px;color:#9aaabe;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
 
 /* detail: data table */
 .detail-table{width:100%;border-collapse:collapse;table-layout:fixed}
 .detail-table{width:100%;border-collapse:collapse;table-layout:auto}
-.detail-table th{text-align:left;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#4a5a6e;
+.detail-table th{text-align:left;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#9aaec4;
   padding:8px 12px;border-bottom:1px solid #1a1f2e;white-space:nowrap;vertical-align:top}
-.detail-table td{font-size:14px;color:#b0bcc8;padding:8px 12px;border-bottom:1px solid #12151e;vertical-align:top;word-wrap:break-word;overflow-wrap:break-word}
+.detail-table td{font-size:14px;color:#d4e0ec;padding:8px 12px;border-bottom:1px solid #12151e;vertical-align:top;word-wrap:break-word;overflow-wrap:break-word}
 .detail-table tr:last-child th,.detail-table tr:last-child td{border-bottom:none}
 
 /* coloured accent bar in detail */
@@ -128,35 +128,35 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 /* wavelength visual */
 .wave-vis{display:flex;align-items:center;gap:6px;margin-top:8px;padding:6px 0}
 .wave-vis svg{flex-shrink:0}
-.wave-vis .wave-label{font-size:12px;color:#3e4a5e;letter-spacing:.5px}
+.wave-vis .wave-label{font-size:12px;color:#9aaabe;letter-spacing:.5px}
 
 /* ── glossary terms in detail ──────────────────────────────── */
 .glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
 .glossary-item{padding:5px 10px;border-bottom:1px solid #12151e}
 .glossary-item:nth-child(odd){border-right:1px solid #12151e}
 .glossary-term{font-size:13px;font-weight:600;color:#88ccff;margin-bottom:1px}
-.glossary-def{font-size:13px;color:#8a96a4;line-height:1.4}
-.glossary-cat{grid-column:1/-1;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#3e4a5e;padding:8px 10px 4px;border-bottom:1px solid #1a1f2e}
+.glossary-def{font-size:13px;color:#c0ccd8;line-height:1.4}
+.glossary-cat{grid-column:1/-1;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#9aaec4;padding:8px 10px 4px;border-bottom:1px solid #1a1f2e}
 
 /* ── propagation panel ─────────────────────────────────────── */
 .prop-section{margin-bottom:14px}
 .prop-section h3{font-size:14px;font-weight:600;color:#ffaa44;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase}
-.prop-section p{font-size:13px;color:#8a96a4;line-height:1.5;margin-bottom:4px}
-.atmo-diagram{width:100%;max-width:700px}
+.prop-section p{font-size:13px;color:#c0ccd8;line-height:1.5;margin-bottom:4px}
+.atmo-diagram{width:100%;max-width:900px}
 .atmo-diagram text{font-family:'JetBrains Mono',monospace}
-.world-map-wrap{position:relative;width:100%;max-width:700px;margin-top:6px}
+.world-map-wrap{position:relative;width:100%;max-width:900px;margin-top:6px}
 .world-map-wrap svg{width:100%;height:auto}
 .world-map-wrap text{font-family:'JetBrains Mono',monospace}
 .prop-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
-.prop-legend-item{display:flex;align-items:center;gap:4px;font-size:12px;color:#6a7a90}
+.prop-legend-item{display:flex;align-items:center;gap:4px;font-size:12px;color:#b0c0d0}
 .prop-legend-swatch{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 
 /* ── placeholder / empty state ─────────────────────────────── */
-.empty-state{flex:1;display:flex;align-items:center;justify-content:center;color:#1e2536;font-size:14px;letter-spacing:2px;text-transform:uppercase;user-select:none}
+.empty-state{flex:1;display:flex;align-items:center;justify-content:center;color:#6a7a8e;font-size:14px;letter-spacing:2px;text-transform:uppercase;user-select:none}
 
 /* ── bottom bar ────────────────────────────────────────────── */
 .bottom-bar{flex:0 0 24px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;
-  background:#0c0e16;border-top:1px solid #1a1f2e;font-size:12px;color:#2a3344;letter-spacing:1px}
+  background:#0c0e16;border-top:1px solid #1a1f2e;font-size:12px;color:#7a8a9e;letter-spacing:1px}
 
 /* ── click ripple ──────────────────────────────────────────── */
 @keyframes ripple{0%{transform:scale(0);opacity:.5}100%{transform:scale(2.5);opacity:0}}
@@ -230,7 +230,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
   <!-- bottom bar -->
   <div class="bottom-bar">
-    <span>&copy; 2026 0xFF5 // Crafted with AI</span>
+    <span>&copy; 2026 0xFF5 // Crafted with AI for people</span>
     <span id="bandCount"></span>
   </div>
 </div>
@@ -245,10 +245,12 @@ const BANDS = [
     { name:'Submarine Communications', freq:'15 – 25 kHz', wl:'12 – 20 km',
       mod:'MSK, FSK', usage:'Military submarine one-way comms',
       prop:'Ground wave follows Earth curvature; penetrates seawater ~20 m',
+      maxDist:'10 000+ km (worldwide)',
       desc:'Used by navies worldwide (US NAA 24 kHz, RU ZEVS 82 Hz feeder) to send short coded messages to ballistic‑missile submarines. Extremely low data rates (~300 bps). Requires multi‑km antenna arrays.' },
     { name:'Standard Time & Frequency', freq:'20 – 25 kHz', wl:'12 – 15 km',
       mod:'OOK, CW', usage:'Precise time/frequency distribution',
       prop:'Ground wave; very stable phase over long distances',
+      maxDist:'5 000 – 10 000 km',
       desc:'Stations like GBR (16 kHz, UK) and NAA provided frequency standards before GPS. Phase stability allows nanosecond‑class timing over thousands of km.' },
   ]},
 
@@ -257,18 +259,22 @@ const BANDS = [
     { name:'Time Signal Broadcasts', freq:'40 – 77.5 kHz', wl:'3.9 – 7.5 km',
       mod:'OOK (on-off keying)', usage:'Atomic‑clock‑synced time distribution',
       prop:'Ground wave; stable day/night; range 1 500 – 3 000 km',
+      maxDist:'1 500 – 3 000 km',
       desc:'DCF77 (77.5 kHz, Germany), WWVB (60 kHz, USA), JJY (40/60 kHz, Japan), MSF (60 kHz, UK). Drives radio‑controlled clocks and watches worldwide.' },
     { name:'LORAN-C Navigation', freq:'90 – 110 kHz', wl:'2.7 – 3.3 km',
       mod:'Pulse, time‑of‑arrival', usage:'Long‑range hyperbolic navigation',
       prop:'Ground wave to ~1 500 km; sky wave further but less precise',
+      maxDist:'1 500 – 2 500 km',
       desc:'Chain of synchronised transmitters; receivers triangulate position from pulse arrival times. Accuracy ~100 m. Enhanced LORAN (eLoran) revived as GPS backup.' },
     { name:'Longwave Radio Broadcast', freq:'148.5 – 283.5 kHz', wl:'1.1 – 2.0 km',
       mod:'AM (DSB-FC)', usage:'Public broadcast radio (Europe, Asia, Africa)',
       prop:'Ground wave; reliable over 1 000+ km day and night',
+      maxDist:'1 000 – 2 000 km',
       desc:'Stations like BBC Radio 4 (198 kHz), Europe 1 (183 kHz), RTL (234 kHz). Declining in use as FM/DAB expand, but still covers vast rural areas.' },
     { name:'NDB / Locator Beacons', freq:'190 – 300 kHz', wl:'1.0 – 1.6 km',
       mod:'AM, CW (Morse ident)', usage:'Aviation non‑directional beacons',
       prop:'Ground wave; range up to 200 NM; subject to night‑effect errors',
+      maxDist:'200 – 400 km (370 NM)',
       desc:'Oldest electronic navaid still in service. Aircraft ADF receivers determine bearing to beacon. Being phased out in favour of GPS/VOR, but still used for instrument approaches.' },
   ]},
 
@@ -277,22 +283,27 @@ const BANDS = [
     { name:'NDB Beacons (upper)', freq:'300 – 530 kHz', wl:'566 – 1 000 m',
       mod:'AM, CW', usage:'Aviation & maritime non‑directional beacons',
       prop:'Ground wave dominant; sky wave at night causes bearing errors',
+      maxDist:'200 – 500 km',
       desc:'Upper NDB range; higher‑powered beacons for en‑route navigation. Co‑exists with maritime radiobeacons. Gradually decommissioned worldwide.' },
     { name:'AM Broadcast (MW)', freq:'530 – 1 700 kHz', wl:'176 – 566 m',
       mod:'AM (DSB-FC)', usage:'Public broadcast radio worldwide',
       prop:'Ground wave ~100 km day; sky wave at night extends to 1 000+ km',
+      maxDist:'100 km day / 1 000+ km night',
       desc:'The classic "AM radio". Channels spaced 9 kHz (ITU) or 10 kHz (Americas). Night‑time sky‑wave propagation causes distant station interference but also enables DX listening.' },
     { name:'160 m Amateur Radio', freq:'1.8 – 2.0 MHz', wl:'150 – 167 m',
       mod:'SSB, CW, FT8, JS8Call', usage:'Amateur radio "Top Band"',
       prop:'Ground wave + NVIS at night; DX via F‑layer in winter',
+      maxDist:'300 km NVIS / 2 000+ km night DX',
       desc:'Challenging amateur band. High atmospheric noise, large antennas. Prized for long‑distance contacts during solar minimum. FT8 mode popular for weak‑signal work.' },
     { name:'Maritime & Aero HF', freq:'1.6 – 3.0 MHz', wl:'100 – 188 m',
       mod:'SSB, DSC, NBDP', usage:'Ship‑to‑shore & aeronautical comms',
       prop:'Ground wave coastal; NVIS short range; sky wave medium range at night',
+      maxDist:'200 km ground / 1 000 km sky wave',
       desc:'MF maritime distress frequency 2 182 kHz (SSB). GMDSS Digital Selective Calling on 2 187.5 kHz. Also used for regional aeronautical en‑route communications.' },
     { name:'Tropical Shortwave', freq:'2.3 – 2.5 MHz', wl:'120 – 130 m',
       mod:'AM', usage:'120 m tropical broadcast band',
       prop:'NVIS propagation; covers ~400 km radius',
+      maxDist:'~400 km (NVIS)',
       desc:'Allocated for broadcasting in tropical regions (ITU Region 1/3) where MF groundwave is heavily attenuated by soil moisture. Few stations remain active.' },
   ]},
 
@@ -301,50 +312,62 @@ const BANDS = [
     { name:'80 m Amateur', freq:'3.5 – 4.0 MHz', wl:'75 – 86 m',
       mod:'SSB, CW, FT8, RTTY', usage:'Amateur radio regional/DX',
       prop:'NVIS day ~500 km; sky wave night DX to several thousand km',
+      maxDist:'500 km NVIS / 3 000 km night',
       desc:'Popular evening/night band. NVIS gives reliable regional coverage. Shared with fixed services in some regions. Heavy QRM in populated areas.' },
     { name:'60 m Amateur', freq:'5.35 – 5.45 MHz', wl:'55 – 56 m',
       mod:'SSB, CW, Digital (channelised)', usage:'Amateur radio, emergency comms',
       prop:'NVIS sweet spot; reliable out to ~600 km',
+      maxDist:'~600 km (NVIS)',
       desc:'Newest amateur HF allocation. Shared with government/military on fixed channels. Excellent for emergency/disaster communications due to reliable NVIS.' },
     { name:'49 m SW Broadcast', freq:'5.9 – 6.2 MHz', wl:'48 – 51 m',
       mod:'AM, DRM', usage:'International shortwave broadcast',
       prop:'Sky wave; single hop to ~3 500 km',
+      maxDist:'~3 500 km (single hop)',
       desc:'One of the most‑used shortwave broadcast bands. BBC, DW, RFI, CRI all active. Best reception at night in target areas. DRM digital mode offers near‑FM quality.' },
     { name:'40 m Amateur', freq:'7.0 – 7.3 MHz', wl:'41 – 43 m',
       mod:'SSB, CW, FT8', usage:'Amateur radio — "workhorse" band',
       prop:'NVIS day; long‑range sky wave at night; F2‑layer refraction',
+      maxDist:'500 km day / worldwide night',
       desc:'Most versatile amateur HF band. Provides regional contacts by day and worldwide DX at night. Contests, nets, digital modes all heavily used.' },
     { name:'31 m SW Broadcast', freq:'9.4 – 9.9 MHz', wl:'30 – 32 m',
       mod:'AM, DRM', usage:'International shortwave broadcast',
       prop:'Sky wave; reliable single/double hop day and night',
+      maxDist:'3 000 – 6 000 km',
       desc:'Primary shortwave broadcast band. Good all‑day propagation. Home to many international broadcasters and utility stations.' },
     { name:'30 m Amateur', freq:'10.1 – 10.15 MHz', wl:'29.6 m',
       mod:'CW, FT8, WSPR', usage:'Amateur radio — digital & CW only',
       prop:'Sky wave; reliable day and night; long skip zone',
+      maxDist:'2 000 – 8 000 km',
       desc:'Narrow band shared with fixed services. CW and digital modes only (no phone). Very popular for WSPR beacon propagation studies and FT8 weak‑signal contacts.' },
     { name:'25 m SW Broadcast', freq:'11.6 – 12.1 MHz', wl:'24.8 – 25.9 m',
       mod:'AM, DRM', usage:'International shortwave broadcast',
       prop:'Sky wave; best during daylight hours at solar medium/high',
+      maxDist:'4 000 – 10 000 km',
       desc:'Daytime broadcast band. Propagation depends on solar activity. Often used for targeting distant time zones during their daytime hours.' },
     { name:'20 m Amateur', freq:'14.0 – 14.35 MHz', wl:'20.9 – 21.4 m',
       mod:'SSB, CW, FT8, SSTV', usage:'Amateur radio — premier DX band',
       prop:'F2‑layer sky wave; single hop ~4 000 km; open most of the day',
+      maxDist:'4 000 km single hop / worldwide',
       desc:'King of amateur DX bands. Open worldwide during daylight in moderate solar conditions. SSB, CW, and digital segments well defined. Home to many DXpeditions.' },
     { name:'17 m Amateur', freq:'18.068 – 18.168 MHz', wl:'16.5 – 16.6 m',
       mod:'SSB, CW, FT8', usage:'Amateur radio WARC band',
       prop:'F2‑layer; open during higher solar activity; less crowded',
+      maxDist:'3 000 – 10 000 km',
       desc:'WARC band — no contests allowed, making it quieter. Good DX openings during solar cycle peaks. Pairs well with 15 m and 12 m.' },
     { name:'15 m Amateur', freq:'21.0 – 21.45 MHz', wl:'14.0 – 14.3 m',
       mod:'SSB, CW, FT8', usage:'Amateur radio DX',
       prop:'F2‑layer daytime; opens with solar activity; long skip',
+      maxDist:'3 000 – 12 000 km',
       desc:'Excellent DX band during solar cycle highs. Skip zone means local contacts difficult. Very active during contests. Quiet at solar minimum.' },
     { name:'CB Radio', freq:'26.965 – 27.405 MHz', wl:'10.97 – 11.13 m',
       mod:'AM, SSB, FM', usage:'Citizen Band personal radio',
       prop:'Ground wave ~10 km; sporadic E / F2 skip gives intercontinental range',
+      maxDist:'10 km ground / worldwide skip',
       desc:'40 channels, licence‑free in most countries. 4 W AM / 12 W SSB typical. Skip conditions can propagate signals worldwide, causing interference but enabling hobby DX.' },
     { name:'10 m Amateur', freq:'28.0 – 29.7 MHz', wl:'10.1 – 10.7 m',
       mod:'SSB, CW, FM, FT8, Sat', usage:'Amateur radio, FM repeaters, satellites',
       prop:'F2 / sporadic E; dead at solar min, worldwide at solar max',
+      maxDist:'3 000 – 15 000 km (F2/Es)',
       desc:'Widest amateur HF band (1.7 MHz). Includes SSB/CW, FM repeater, and satellite sub‑bands. Propagation swings dramatically with solar cycle. 10 m FM popular for local use.' },
   ]},
 
@@ -353,34 +376,42 @@ const BANDS = [
     { name:'Low VHF TV (Ch 2-6)', freq:'54 – 88 MHz', wl:'3.4 – 5.6 m',
       mod:'ATSC (8VSB), DVB-T (COFDM)', usage:'Television broadcast',
       prop:'Line of sight + knife‑edge diffraction; tropo ducting occasional',
+      maxDist:'80 – 150 km',
       desc:'Original TV channels. Susceptible to impulse noise and multipath. Most broadcasters moved to UHF post digital transition, but some markets retain low‑VHF.' },
     { name:'FM Broadcast', freq:'87.5 – 108 MHz', wl:'2.8 – 3.4 m',
       mod:'WBFM (±75 kHz dev), RDS', usage:'Public FM radio broadcast',
       prop:'Line of sight ~100 km; tropo ducting extends range; sporadic E rare',
+      maxDist:'~100 km (line of sight)',
       desc:'200 kHz channel spacing (most regions). Stereo via 38 kHz pilot tone. RDS provides station ID and traffic info. HD Radio (IBOC) adds digital sidebands in some markets.' },
     { name:'Airband (COM + NAV)', freq:'108 – 137 MHz', wl:'2.2 – 2.8 m',
       mod:'AM (COM), VOR/ILS (NAV)', usage:'Aviation communication & navigation',
       prop:'Line of sight; range depends on altitude (FL350 ≈ 200 NM)',
+      maxDist:'~370 km at FL350 (200 NM)',
       desc:'108–118 MHz: VOR/ILS navigation. 118–137 MHz: ATC voice (AM, 8.33 kHz spacing in Europe). AM chosen for "party line" — all pilots hear each other.' },
     { name:'2 m Amateur', freq:'144 – 148 MHz', wl:'2.0 – 2.1 m',
       mod:'FM, SSB, CW, Digital, APRS', usage:'Amateur radio — most popular VHF band',
       prop:'Line of sight; tropo ducting, meteor scatter, EME (moonbounce)',
+      maxDist:'50 – 100 km / 2 000 km tropo DX',
       desc:'FM repeaters provide wide local coverage. SSB/CW for weak‑signal DX. APRS digital position reporting. Satellite uplinks/downlinks. EME contacts at ~2.4 s round trip.' },
     { name:'Marine VHF', freq:'156 – 162 MHz', wl:'1.85 – 1.92 m',
       mod:'FM (25/12.5 kHz), DSC', usage:'Maritime ship communications',
       prop:'Line of sight over water ~20–50 NM depending on antenna height',
+      maxDist:'35 – 90 km (20–50 NM)',
       desc:'Channel 16 (156.8 MHz) international distress/calling. DSC on Ch 70. AIS on 161.975/162.025 MHz. Bridge‑to‑bridge, port operations, coast guard.' },
     { name:'NOAA Weather Radio', freq:'162.4 – 162.55 MHz', wl:'1.85 m',
       mod:'WBFM', usage:'Continuous weather broadcasts (USA/Canada)',
       prop:'Line of sight; ~40 mile radius per transmitter',
+      maxDist:'~65 km (40 mi) per transmitter',
       desc:'Seven frequencies. SAME (Specific Area Message Encoding) for targeted alerts. 24/7 automated broadcasts from NWS offices. Weather alert receivers activate on tone.' },
     { name:'High VHF TV (Ch 7-13)', freq:'174 – 216 MHz', wl:'1.4 – 1.7 m',
       mod:'ATSC (8VSB), DVB-T', usage:'Television broadcast',
       prop:'Line of sight; less noise than low VHF; good indoor reception',
+      maxDist:'70 – 120 km',
       desc:'Many stations moved here post‑digital transition. Better propagation characteristics than low VHF. Compact antennas. Good balance of range and bandwidth.' },
     { name:'DAB / DAB+ Digital Radio', freq:'174 – 240 MHz', wl:'1.25 – 1.7 m',
       mod:'OFDM (COFDM), HE-AAC v2', usage:'Digital audio broadcasting (Band III)',
       prop:'Line of sight; single‑frequency networks (SFN) for seamless coverage',
+      maxDist:'70 – 100 km',
       desc:'Multiplexes carry 10-18 stations per 1.5 MHz block. Near CD quality. Widely deployed in Europe, Australia, parts of Asia. Replaces analogue FM in several countries.' },
   ]},
 
@@ -389,50 +420,62 @@ const BANDS = [
     { name:'70 cm Amateur', freq:'420 – 450 MHz', wl:'67 – 71 cm',
       mod:'FM, SSB, CW, ATV, Digital', usage:'Amateur radio, ATV, satellite, repeaters',
       prop:'Line of sight; building penetration moderate; tropo DX possible',
+      maxDist:'30 – 80 km / tropo DX',
       desc:'Second‑most‑popular amateur band. FM repeaters, amateur television (ATV), satellite uplinks, and digital voice (D-STAR, DMR, C4FM). Shared with radar in some regions.' },
     { name:'UHF TV (Ch 14-36)', freq:'470 – 608 MHz', wl:'49 – 64 cm',
       mod:'ATSC 1.0/3.0, DVB-T/T2', usage:'Digital television broadcast',
       prop:'Line of sight; moderate building penetration; multipath manageable with OFDM',
+      maxDist:'50 – 100 km',
       desc:'Primary TV band post-repack. ATSC 3.0 enables 4K, mobile reception, and IP delivery. 600 MHz band (617-698) auctioned for cellular in many countries.' },
     { name:'LTE Band 12/13/14 (700 MHz)', freq:'698 – 798 MHz', wl:'38 – 43 cm',
       mod:'OFDMA / SC-FDMA', usage:'4G LTE cellular — "first responder" & rural',
       prop:'Good building/foliage penetration; cell radius up to 10+ km rural',
+      maxDist:'10 – 30 km per cell',
       desc:'First digital dividend spectrum from TV repack. FirstNet (Band 14) for public safety. Excellent coverage layer for rural LTE. T-Mobile, AT&T primary users.' },
     { name:'Cellular 800/900 MHz', freq:'824 – 960 MHz', wl:'31 – 36 cm',
       mod:'GSM (GMSK), CDMA, LTE (OFDMA)', usage:'2G/3G/4G cellular',
       prop:'Good penetration; cell radius ~5-35 km; diffraction around hills',
+      maxDist:'5 – 35 km per cell',
       desc:'Original cellular bands. Band 5/26 (850), Band 8 (900). GSM-900 was global 2G workhorse. Now refarmed to LTE/5G in many markets. Excellent rural coverage.' },
     { name:'GPS L2', freq:'1 227.6 MHz', wl:'24.4 cm',
       mod:'BPSK, CDMA (C/A & P(Y))', usage:'Satellite navigation (secondary signal)',
       prop:'Line of sight from MEO satellites; ~20 200 km altitude',
+      maxDist:'20 200 km (MEO satellite)',
       desc:'Dual-frequency GPS receivers use L1+L2 to correct ionospheric delay, achieving centimetre accuracy (RTK). L2C civil signal being added to newer satellites.' },
     { name:'23 cm Amateur', freq:'1 240 – 1 300 MHz', wl:'23 – 24 cm',
       mod:'SSB, CW, FM, ATV, Digital', usage:'Amateur radio microwave, ATV, EME',
       prop:'Line of sight; rain fade negligible; EME possible with high‑gain arrays',
+      maxDist:'30 – 80 km / EME 384 400 km',
       desc:'Entry‑level microwave amateur band. Wideband ATV popular. D-STAR DD (128 kbps data) here. Shared with radar and GPS. EME with 2×15‑el Yagi arrays.' },
     { name:'GPS L1', freq:'1 575.42 MHz', wl:'19.0 cm',
       mod:'BPSK, BOC (L1C), CDMA', usage:'Primary satellite navigation signal',
       prop:'Line of sight from 24+ MEO sats; 20 200 km; indoor penetration poor',
+      maxDist:'20 200 km (MEO satellite)',
       desc:'Primary civilian GPS frequency. Also GLONASS L1, Galileo E1, BeiDou B1C. Achieved by all GNSS smartphones. C/A code gives ~3-5 m accuracy; SBAS improves to ~1 m.' },
     { name:'Cellular 1800/1900 MHz', freq:'1 710 – 1 990 MHz', wl:'15 – 17.5 cm',
       mod:'GSM, LTE (OFDMA), 5G NR', usage:'2G/3G/4G/5G cellular',
       prop:'Moderate building penetration; cell radius ~2-8 km urban',
+      maxDist:'2 – 8 km per cell',
       desc:'DCS-1800 (Band 3) and PCS-1900 (Band 2/25). Global LTE anchor bands. Good capacity/coverage balance. AWS (Band 4/66) at 1710-1755/2110-2155 for additional capacity.' },
     { name:'UMTS / LTE 2100 MHz', freq:'1 920 – 2 170 MHz', wl:'13.8 – 15.6 cm',
       mod:'W-CDMA, LTE (OFDMA)', usage:'3G/4G cellular',
       prop:'Moderate penetration; cell radius ~1-5 km; rain fade negligible',
+      maxDist:'1 – 5 km per cell',
       desc:'Band 1 — primary 3G (UMTS/WCDMA) worldwide. 5 MHz WCDMA carriers offer ~14 Mbps HSPA+. Being refarmed to LTE in many markets. Paired FDD operation.' },
     { name:'WiFi 2.4 GHz', freq:'2 400 – 2 483.5 MHz', wl:'12.1 – 12.5 cm',
       mod:'OFDM, DSSS (802.11b), QAM-1024', usage:'Wireless LAN (802.11b/g/n/ax)',
       prop:'Indoor 30-50 m; outdoor 100-300 m; wall penetration good; congested',
+      maxDist:'50 m indoor / 300 m outdoor',
       desc:'ISM band — unlicensed worldwide. 14 channels (3 non‑overlapping in most regions). WiFi 4/5/6 all support 2.4 GHz. Also Zigbee, Thread, and Z-Wave Long Range.' },
     { name:'Bluetooth', freq:'2 402 – 2 480 MHz', wl:'12.1 – 12.5 cm',
       mod:'FHSS, GFSK, π/4-DQPSK, 8DPSK', usage:'Short-range wireless (audio, IoT, mesh)',
       prop:'Class 1: 100 m, Class 2: 10 m, Class 3: 1 m; 1 600 hops/sec',
+      maxDist:'1 – 100 m (class dependent)',
       desc:'79 channels × 1 MHz, frequency hopping 1 600×/sec. BT Classic for audio (A2DP, aptX). BLE 5.x for IoT, beacons, mesh. Coexists with WiFi via adaptive hopping.' },
     { name:'S-band Radar', freq:'2 700 – 3 000 MHz', wl:'10 – 11.1 cm',
       mod:'Pulse, Doppler, Pulse‑compression', usage:'Weather radar, ATC radar',
       prop:'Line of sight; range 200-400 km for weather; rain attenuation low',
+      maxDist:'200 – 400 km',
       desc:'NEXRAD (WSR-88D) weather radar at 2.7-3.0 GHz. Airport surveillance radar (ASR-11). Good balance of resolution and range for precipitation detection.' },
   ]},
 
@@ -441,22 +484,27 @@ const BANDS = [
     { name:'9 cm Amateur', freq:'3 400 – 3 475 MHz', wl:'8.6 – 8.8 cm',
       mod:'SSB, CW, FM, Digital', usage:'Amateur radio microwave',
       prop:'Line of sight; rain fade minimal; parabolic dishes needed for DX',
+      maxDist:'30 – 60 km / EME possible',
       desc:'Shared with radar and 5G in many regions. Narrowband SSB/CW for contests and EME. Wideband experimentation. Being squeezed by 5G allocations globally.' },
     { name:'5G NR n77/n78', freq:'3 300 – 4 200 MHz', wl:'7.1 – 9.1 cm',
       mod:'OFDMA, 256-QAM, MIMO, Beamforming', usage:'5G NR mid‑band cellular',
       prop:'Range 1-3 km; moderate building penetration; rain fade negligible',
+      maxDist:'1 – 3 km per cell',
       desc:'The "Goldilocks" 5G band — balance of speed and coverage. n78 (3.3-3.8 GHz) most common globally. 100 MHz carrier BW typical. Massive MIMO (64T64R) essential. ~1 Gbps peak.' },
     { name:'C-band Satellite (DL)', freq:'3 700 – 4 200 MHz', wl:'7.1 – 8.1 cm',
       mod:'QPSK, 8PSK, DVB-S/S2', usage:'Satellite TV & data downlink',
       prop:'Line of sight to GEO (35 786 km); rain‑fade resistant',
+      maxDist:'35 786 km (GEO satellite)',
       desc:'Traditional satellite TV distribution band. Large dishes (2-3 m). Being partially cleared for 5G (3.7-3.98 GHz in USA). Remains critical for video distribution in tropics where rain attenuates Ku‑band.' },
     { name:'C-band Radar', freq:'4 000 – 4 500 MHz', wl:'6.7 – 7.5 cm',
       mod:'Pulse, Doppler', usage:'Weather & marine radar',
       prop:'Line of sight; shorter range than S-band but higher resolution',
+      maxDist:'100 – 250 km',
       desc:'Used where S-band congested. Some weather radars at 5.3-5.6 GHz (slightly above our range). Good for detecting smaller precipitation particles. TDWR uses nearby bands.' },
     { name:'5G NR n79', freq:'4 400 – 5 000 MHz', wl:'6.0 – 6.8 cm',
       mod:'OFDMA, 256-QAM, MIMO', usage:'5G NR supplementary mid‑band',
       prop:'Range 0.5-2 km; building penetration less than n78',
+      maxDist:'0.5 – 2 km per cell',
       desc:'Additional 5G capacity band, primarily deployed in Japan (DOCOMO, SoftBank). 400-600 MHz bandwidth available. Complements n77/n78 for dense urban deployment.' },
   ]},
 ];
@@ -698,6 +746,7 @@ function selectSub(band, sub, el) {
       row('Modulation', sub.mod) +
       row('Usage', sub.usage) +
       row('Propagation', sub.prop) +
+      row('Max Distance', sub.maxDist) +
       row('Description', sub.desc) +
     '</table>' +
     waveVis(sub.wl, band.color);
@@ -791,7 +840,7 @@ function openPropagation() {
 
 /* ── Atmosphere layers diagram (SVG) ──────────────────────── */
 function buildAtmoDiagram() {
-  const w = 700, h = 380;
+  const w = 900, h = 400;
   /* layers: name, bottom altitude (km), top (km), colour, opacity */
   const layers = [
     { name:'Troposphere', bot:0, top:12, color:'#2a5a4a', note:'Weather, tropo ducting (VHF/UHF)' },
@@ -802,11 +851,11 @@ function buildAtmoDiagram() {
     { name:'F2-Layer', bot:250, top:500, color:'#30306a', note:'Primary HF refraction layer; DX engine' },
   ];
   /* piecewise scale: 0-100km gets 40% of height, 100-520km gets 60% */
-  const usable = h - 90;
+  const usable = h - 100;
   const split = 0.4 * usable; /* pixels for 0-100km */
   const scale = y => {
-    if (y <= 100) return h - 60 - (y / 100) * split;
-    return h - 60 - split - ((y - 100) / 420) * (usable - split);
+    if (y <= 100) return h - 70 - (y / 100) * split;
+    return h - 70 - split - ((y - 100) / 420) * (usable - split);
   };
 
   let svg = '<div class="prop-section"><h3>Atmospheric Layers & Ionosphere</h3>' +
@@ -819,7 +868,7 @@ function buildAtmoDiagram() {
   [0, 50, 100, 200, 300, 400, 500].forEach(alt => {
     const y = scale(alt);
     svg += '<line x1="55" y1="' + y + '" x2="' + (w-10) + '" y2="' + y + '" stroke="#1a1f2e" stroke-width="0.5" stroke-dasharray="3,3"/>';
-    svg += '<text x="50" y="' + (y+4) + '" fill="#6a7a90" font-size="11" text-anchor="end">' + alt + ' km</text>';
+    svg += '<text x="50" y="' + (y+4) + '" fill="#a0b0c8" font-size="11" text-anchor="end">' + alt + ' km</text>';
   });
 
   /* draw layers */
@@ -829,28 +878,32 @@ function buildAtmoDiagram() {
     svg += '<rect x="65" y="' + y1 + '" width="' + (w-85) + '" height="' + (y2-y1) + '" fill="' + l.color + '" opacity="0.4" rx="2"/>';
     const mid = (y1 + y2) / 2;
     svg += '<text x="75" y="' + (mid+4) + '" fill="#d0dce8" font-size="13" font-weight="600">' + l.name + '</text>';
-    svg += '<text x="' + (w-20) + '" y="' + (mid+4) + '" fill="#8a96a4" font-size="11" text-anchor="end">' + l.note + '</text>';
+    svg += '<text x="' + (w-20) + '" y="' + (mid+4) + '" fill="#c0ccd8" font-size="11" text-anchor="end">' + l.note + '</text>';;
   });
 
   /* Earth surface */
   const ground = scale(0);
   svg += '<rect x="65" y="' + ground + '" width="' + (w-85) + '" height="6" fill="#1a3020" rx="1"/>';
-  svg += '<text x="75" y="' + (ground+20) + '" fill="#5a8a6a" font-size="11" font-weight="500">Earth Surface</text>';
+  svg += '<text x="75" y="' + (ground+20) + '" fill="#8abba0" font-size="11" font-weight="500">Earth Surface</text>';
 
   /* draw propagation arrows */
-  /* Line of sight — draw first so it's behind */
-  const losY = ground - 12;
-  svg += '<line x1="140" y1="' + losY + '" x2="300" y2="' + losY + '" stroke="#33ff88" stroke-width="2"/>';
-  svg += '<text x="220" y="' + (ground + 36) + '" fill="#33ff88" font-size="11" font-weight="500" text-anchor="middle">Line of Sight (VHF/UHF/SHF)</text>';
-
-  /* Ground wave */
-  svg += '<path d="M100,' + (ground-2) + ' Q' + (w/2) + ',' + (ground-26) + ' ' + (w-120) + ',' + (ground-2) + '" fill="none" stroke="#ffc833" stroke-width="2" stroke-dasharray="4,2"/>';
-  svg += '<text x="' + (w/2) + '" y="' + (ground + 50) + '" fill="#ffc833" font-size="11" font-weight="500" text-anchor="middle">Ground Wave (LF/MF)</text>';
-
-  /* Sky wave — bouncing off F2 */
+  /* Sky wave — bouncing off F2 (draw first, behind other elements) */
   const f2mid = (scale(500) + scale(250)) / 2;
-  svg += '<path d="M130,' + (ground-3) + ' L' + (w/3) + ',' + (f2mid+10) + ' L' + (w*2/3-50) + ',' + (ground-3) + '" fill="none" stroke="#aaff33" stroke-width="2"/>';
-  svg += '<text x="' + (w/3+15) + '" y="' + (f2mid-2) + '" fill="#aaff33" font-size="11" font-weight="500">Sky Wave / F2 (HF)</text>';
+  const skyX1 = 160, skyPeakX = w/3 + 10, skyX2 = w*2/3 - 30;
+  svg += '<path d="M' + skyX1 + ',' + (ground-3) + ' L' + skyPeakX + ',' + (f2mid+10) + ' L' + skyX2 + ',' + (ground-3) + '" fill="none" stroke="#aaff33" stroke-width="2"/>';
+  svg += '<text x="' + (skyPeakX+15) + '" y="' + (f2mid-2) + '" fill="#aaff33" font-size="11" font-weight="500">Sky Wave / F2 (HF)</text>';
+
+  /* Line of sight — short line near ground */
+  const losY = ground - 12;
+  svg += '<line x1="' + skyX1 + '" y1="' + losY + '" x2="' + ((skyX1 + skyX2)/2) + '" y2="' + losY + '" stroke="#33ff88" stroke-width="2"/>';
+  /* Label above the green LoS line */
+  const losMidX = (skyX1 + (skyX1 + skyX2)/2) / 2;
+  svg += '<text x="' + losMidX + '" y="' + (losY - 6) + '" fill="#33ff88" font-size="11" font-weight="500" text-anchor="middle">Line of Sight (VHF/UHF/SHF)</text>';
+
+  /* Ground wave — curved line along surface */
+  svg += '<path d="M100,' + (ground-2) + ' Q' + (w/2) + ',' + (ground-30) + ' ' + (w-120) + ',' + (ground-2) + '" fill="none" stroke="#ffc833" stroke-width="2" stroke-dasharray="4,2"/>';
+  /* Label below the line */
+  svg += '<text x="' + (w/2) + '" y="' + (ground + 38) + '" fill="#ffc833" font-size="11" font-weight="500" text-anchor="middle">Ground Wave (LF/MF)</text>';
 
   svg += '</svg></div>';
   return svg;
@@ -873,7 +926,7 @@ function buildPropModes() {
 
 /* ── Day/Night World Map ──────────────────────────────────── */
 function buildWorldMap() {
-  const w = 680, h = 320;
+  const w = 880, h = 400;
   const now = new Date();
 
   /* calculate subsolar point */
@@ -900,12 +953,12 @@ function buildWorldMap() {
   for (let lon = -180; lon <= 180; lon += 30) {
     const [x] = lonLatToXY(lon, 0);
     svg += '<line x1="' + x + '" y1="15" x2="' + x + '" y2="' + (h-25) + '" stroke="#131720" stroke-width="0.5"/>';
-    if (lon % 60 === 0) svg += '<text x="' + x + '" y="' + (h-14) + '" fill="#2a3344" font-size="7" text-anchor="middle">' + (lon >= 0 ? lon + '°E' : (-lon) + '°W') + '</text>';
+    if (lon % 60 === 0) svg += '<text x="' + x + '" y="' + (h-14) + '" fill="#7a8a9e" font-size="8" text-anchor="middle">' + (lon >= 0 ? lon + '°E' : (-lon) + '°W') + '</text>';
   }
   for (let lat = -60; lat <= 60; lat += 30) {
     const [, y] = lonLatToXY(0, lat);
     svg += '<line x1="40" y1="' + y + '" x2="' + (w-40) + '" y2="' + y + '" stroke="#131720" stroke-width="0.5"/>';
-    svg += '<text x="36" y="' + (y+3) + '" fill="#2a3344" font-size="7" text-anchor="end">' + (lat >= 0 ? lat + '°N' : (-lat) + '°S') + '</text>';
+    svg += '<text x="36" y="' + (y+3) + '" fill="#7a8a9e" font-size="8" text-anchor="end">' + (lat >= 0 ? lat + '°N' : (-lat) + '°S') + '</text>';
   }
 
   /* draw night polygon */
@@ -949,28 +1002,52 @@ function buildWorldMap() {
   svg += '<path d="' + termPath + '" fill="none" stroke="#ffaa44" stroke-width="1.5" opacity="0.7"/>';
 
   /* simplified continent outlines — major land masses as polygons */
+  /* simplified continent outlines — clean single-pass loops */
   const continents = [
-    /* North America */
-    [[-168,72],[-162,64],[-153,60],[-140,60],[-138,56],[-135,54],[-130,52],[-125,50],[-124,42],[-117,33],[-110,32],[-105,30],[-100,28],[-97,26],[-97,28],[-95,30],[-90,29],[-85,30],[-82,25],[-80,25],[-82,30],[-76,35],[-75,38],[-72,41],[-70,42],[-67,44],[-67,47],[-61,46],[-64,44],[-66,43],[-70,43],[-72,41],[-75,38],[-76,35],[-82,30],[-81,31],[-85,30],[-90,29],[-90,28],[-95,28],[-97,26],[-100,20],[-105,20],[-108,23],[-115,28],[-118,32],[-122,37],[-124,42],[-125,48],[-123,49],[-128,52],[-135,57],[-141,60],[-148,60],[-153,58],[-162,63],[-165,61],[-168,66],[-165,72],[-155,71],[-140,70],[-130,70],[-120,73],[-100,73],[-90,70],[-85,70],[-82,73],[-75,68],[-63,58],[-55,52],[-55,47],[-60,47],[-65,44],[-67,44],[-67,47],[-61,46],[-55,47],[-55,52],[-58,55],[-63,58],[-68,60],[-75,62],[-80,64],[-85,70],[-90,70],[-95,72],[-100,73],[-120,73],[-130,70],[-140,70],[-155,71],[-168,72]],
+    /* North America — clockwise from Alaska */
+    [[-168,72],[-162,70],[-155,71],[-147,70],[-140,70],[-132,69],[-123,72],[-113,74],[-100,74],[-92,72],[-85,70],[-80,68],[-73,65],[-65,62],[-60,55],[-55,52],[-56,47],[-60,47],[-64,46],[-67,45],[-70,44],[-71,42],[-74,41],[-75,39],[-76,37],[-81,31],[-82,25],[-80,25],[-83,28],[-85,30],[-90,29],[-97,28],[-97,26],[-100,28],[-104,30],[-108,31],[-112,32],[-117,33],[-120,35],[-124,42],[-124,46],[-126,50],[-130,55],[-133,57],[-140,60],[-148,60],[-153,58],[-160,62],[-166,64],[-168,67],[-168,72]],
+    /* Mexico + Central America */
+    [[-117,33],[-112,32],[-108,31],[-104,30],[-100,28],[-97,26],[-100,20],[-97,18],[-96,16],[-92,15],[-88,16],[-86,14],[-84,11],[-82,8],[-80,8],[-78,9],[-82,12],[-86,16],[-90,16],[-93,18],[-97,22],[-104,26],[-108,28],[-115,30],[-117,33]],
     /* Greenland */
-    [[-52,60],[-44,60],[-22,70],[-20,76],[-18,80],[-26,83],[-45,83],[-55,82],[-70,77],[-58,76],[-55,73],[-54,70],[-52,60]],
+    [[-52,60],[-48,62],[-44,60],[-36,65],[-25,70],[-22,72],[-20,76],[-18,80],[-24,82],[-36,83],[-45,83],[-52,82],[-60,80],[-68,77],[-65,75],[-58,76],[-56,73],[-54,69],[-52,65],[-52,60]],
     /* South America */
-    [[-80,10],[-77,8],[-72,12],[-67,12],[-62,10],[-60,8],[-52,4],[-50,0],[-48,-2],[-44,-2],[-40,-6],[-38,-10],[-35,-8],[-35,-14],[-38,-18],[-40,-22],[-42,-23],[-44,-23],[-48,-28],[-50,-29],[-52,-33],[-55,-34],[-58,-38],[-65,-42],[-67,-46],[-66,-52],[-68,-55],[-73,-50],[-75,-45],[-72,-36],[-71,-30],[-70,-25],[-70,-18],[-75,-15],[-76,-10],[-78,-5],[-80,0],[-80,5],[-77,8],[-80,10]],
-    /* Europe */
-    [[-10,36],[-6,37],[0,38],[2,42],[3,43],[5,44],[3,47],[0,45],[-2,44],[-8,44],[-9,43],[-5,44],[0,45],[3,47],[5,48],[2,51],[4,52],[7,54],[8,55],[12,55],[13,54],[15,54],[18,55],[20,54],[24,55],[27,56],[28,58],[25,59],[23,59],[22,60],[25,62],[28,64],[30,65],[27,70],[25,71],[20,69],[18,69],[15,68],[12,66],[10,64],[8,58],[6,58],[5,60],[4,52],[2,51],[0,50],[-2,49],[-5,48],[-8,48],[-10,44],[-10,36]],
-    /* Africa */
-    [[-17,15],[-15,11],[-12,8],[-8,5],[-5,5],[0,5],[3,6],[8,5],[10,4],[10,2],[9,1],[9,-1],[12,-5],[14,-10],[17,-15],[20,-18],[25,-20],[28,-23],[30,-27],[33,-34],[28,-33],[26,-30],[20,-35],[18,-35],[15,-30],[12,-25],[12,-18],[10,-12],[8,-5],[5,0],[3,5],[8,5],[10,4],[10,2],[9,1],[12,4],[15,2],[18,0],[20,-2],[25,-5],[30,-10],[35,-15],[37,-20],[40,-22],[42,-15],[45,-12],[48,-10],[50,-3],[50,2],[48,5],[45,8],[42,12],[38,14],[35,12],[30,12],[28,15],[25,18],[20,18],[18,20],[15,22],[12,25],[10,30],[8,35],[5,36],[2,36],[0,35],[-3,35],[-5,36],[-8,36],[-12,35],[-15,28],[-17,22],[-17,15]],
-    /* Asia */
-    [[28,58],[30,55],[32,50],[35,47],[37,45],[40,42],[42,38],[44,40],[48,38],[50,37],[52,35],[55,25],[58,24],[62,25],[65,20],[70,20],[75,15],[78,8],[77,15],[80,12],[85,15],[88,22],[90,22],[92,20],[95,17],[100,14],[102,10],[104,2],[106,5],[108,10],[110,20],[115,22],[120,22],[122,25],[120,32],[122,32],[125,35],[128,37],[130,42],[132,44],[135,45],[140,43],[142,45],[145,44],[150,58],[158,60],[163,62],[170,65],[175,68],[180,68],[180,72],[170,70],[160,66],[150,60],[142,48],[140,55],[130,56],[125,53],[120,54],[110,53],[100,60],[90,55],[80,50],[75,55],[70,55],[65,55],[60,58],[55,60],[50,55],[45,50],[40,45],[37,45],[35,47],[32,50],[30,55],[28,58]],
+    [[-80,10],[-77,8],[-72,12],[-68,12],[-63,10],[-60,8],[-55,5],[-52,3],[-50,0],[-48,-1],[-44,-2],[-40,-5],[-37,-8],[-35,-8],[-35,-13],[-38,-16],[-39,-18],[-41,-22],[-43,-23],[-46,-24],[-48,-27],[-50,-29],[-53,-33],[-55,-35],[-58,-38],[-64,-42],[-66,-46],[-66,-50],[-69,-52],[-68,-55],[-72,-52],[-75,-48],[-75,-45],[-73,-40],[-72,-36],[-71,-30],[-70,-24],[-70,-18],[-75,-14],[-77,-10],[-78,-5],[-80,0],[-78,4],[-77,8],[-80,10]],
+    /* Iberian Peninsula */
+    [[-10,36],[-6,37],[-2,36],[0,38],[2,41],[3,43],[5,44],[4,46],[1,46],[-2,44],[-5,44],[-9,43],[-10,40],[-10,36]],
+    /* France-Germany-Poland-Balkans */
+    [[-5,48],[-2,49],[0,50],[2,51],[4,52],[6,54],[8,55],[10,55],[12,55],[14,54],[18,55],[20,54],[23,55],[26,56],[28,58],[26,60],[24,59],[22,60],[24,62],[26,64],[28,66],[28,70],[26,71],[22,70],[20,69],[18,69],[16,68],[13,66],[11,64],[9,58],[7,58],[6,62],[5,60],[4,52],[2,51],[0,50],[-2,49],[-5,48]],
+    /* Scandinavia */
+    [[5,60],[8,58],[10,59],[13,62],[16,65],[18,69],[20,69],[22,70],[26,71],[28,70],[28,66],[26,64],[24,62],[22,60],[20,60],[15,63],[12,60],[9,58],[5,60]],
+    /* Africa — clockwise from Morocco */
+    [[-17,15],[-16,12],[-14,10],[-12,8],[-8,5],[-5,5],[0,5],[3,6],[7,5],[10,4],[12,4],[15,3],[18,0],[22,-2],[26,-5],[30,-10],[34,-14],[36,-18],[38,-20],[40,-21],[42,-16],[45,-12],[48,-8],[50,-2],[50,2],[48,5],[46,8],[44,11],[42,13],[38,14],[35,12],[33,10],[32,12],[30,14],[28,15],[25,17],[22,18],[20,20],[18,22],[15,25],[12,28],[10,32],[8,36],[5,36],[2,36],[0,36],[-3,35],[-5,36],[-7,36],[-10,35],[-13,33],[-15,28],[-17,22],[-17,15]],
+    /* Africa south — below equator */
+    [[10,4],[10,2],[9,1],[9,-1],[12,-5],[14,-10],[17,-15],[20,-18],[24,-20],[27,-22],[30,-26],[32,-28],[33,-34],[28,-33],[22,-34],[20,-35],[18,-34],[17,-30],[14,-26],[12,-20],[12,-15],[10,-10],[8,-5],[6,0],[4,4],[7,5],[10,4]],
+    /* Asia — clockwise from Turkey */
+    [[28,58],[30,55],[33,52],[35,48],[37,45],[40,42],[43,40],[45,38],[48,37],[50,37],[53,35],[55,27],[58,24],[62,25],[66,24],[68,22],[70,20],[73,18],[76,15],[78,8],[80,12],[84,16],[88,22],[90,22],[92,20],[96,17],[100,14],[103,10],[105,2],[106,5],[108,10],[110,16],[112,20],[116,22],[120,22],[122,25],[121,30],[122,32],[125,35],[128,37],[130,42],[132,44],[135,45],[140,43],[142,45],[145,44],[148,50],[152,56],[155,58],[160,60],[165,64],[170,67],[175,68],[180,68],[180,72],[175,72],[170,70],[162,68],[156,64],[150,60],[145,54],[142,48],[140,52],[138,55],[132,56],[126,54],[122,54],[115,52],[110,53],[105,56],[100,58],[95,56],[90,55],[82,50],[78,52],[75,54],[70,55],[65,55],[62,57],[58,58],[55,60],[52,56],[48,52],[45,48],[42,45],[40,42],[37,45],[35,48],[33,52],[30,55],[28,58]],
+    /* Indian subcontinent */
+    [[68,22],[70,20],[73,18],[76,15],[78,8],[77,6],[76,8],[73,12],[72,16],[70,20],[68,22]],
+    /* Arabian Peninsula */
+    [[35,30],[37,28],[40,25],[43,22],[45,18],[48,16],[50,17],[52,20],[55,22],[56,24],[56,26],[55,27],[53,24],[50,22],[48,18],[45,20],[43,22],[40,25],[37,28],[35,30]],
     /* Australia */
-    [[114,-26],[115,-20],[117,-15],[121,-14],[129,-15],[133,-12],[136,-12],[138,-16],[140,-18],[142,-11],[146,-15],[148,-17],[150,-22],[152,-25],[154,-28],[153,-32],[150,-35],[147,-38],[142,-38],[138,-36],[135,-34],[130,-32],[126,-32],[122,-28],[118,-22],[115,-20],[114,-26]],
-    /* Japan/Korea (inset islands) */
-    [[130,33],[131,34],[135,35],[137,37],[140,39],[142,43],[145,44],[145,42],[141,38],[138,36],[136,34],[132,32],[130,33]],
-    /* UK/Ireland */
-    [[-6,50],[-5,52],[-3,53],[-5,55],[-6,57],[-3,58],[-2,57],[0,53],[1,52],[0,51],[-4,50],[-6,50]],
-    [[-10,52],[-7,52],[-6,53],[-8,55],[-10,54],[-10,52]],
-    /* New Zealand */
-    [[173,-38],[175,-37],[178,-37],[178,-42],[175,-43],[173,-42],[172,-44],[168,-46],[167,-45],[170,-43],[172,-41],[173,-38]],
+    [[115,-25],[116,-22],[118,-18],[120,-15],[125,-14],[129,-15],[133,-12],[136,-12],[138,-15],[140,-17],[142,-11],[144,-13],[146,-15],[149,-18],[151,-24],[153,-27],[154,-29],[153,-32],[151,-34],[149,-37],[147,-39],[144,-38],[141,-38],[138,-36],[136,-35],[132,-33],[129,-32],[126,-32],[123,-30],[120,-28],[118,-24],[116,-22],[115,-25]],
+    /* Japan */
+    [[130,31],[131,33],[133,34],[135,35],[137,37],[140,40],[141,42],[143,43],[145,44],[145,43],[142,40],[139,36],[136,34],[133,32],[130,31]],
+    /* UK */
+    [[-6,50],[-5,51],[-3,53],[-4,55],[-6,58],[-3,58],[-2,57],[0,53],[1,52],[0,51],[-3,50],[-6,50]],
+    /* Ireland */
+    [[-10,52],[-8,52],[-6,53],[-7,55],[-10,54],[-10,52]],
+    /* Italy */
+    [[8,44],[10,44],[12,42],[14,41],[16,39],[16,38],[15,38],[13,40],[12,42],[10,43],[8,44]],
+    /* New Zealand North */
+    [[173,-38],[175,-37],[178,-37],[178,-41],[176,-42],[174,-42],[173,-38]],
+    /* New Zealand South */
+    [[168,-44],[170,-43],[172,-42],[172,-44],[170,-46],[168,-46],[168,-44]],
+    /* Indonesia */
+    [[96,6],[98,4],[100,1],[104,-2],[106,-6],[110,-7],[114,-8],[118,-8],[120,-6],[116,-2],[114,0],[110,4],[106,0],[100,1],[96,6]],
+    /* Borneo */
+    [[108,4],[112,2],[115,2],[118,5],[118,6],[116,7],[114,6],[110,3],[108,4]],
+    /* Madagascar */
+    [[44,-12],[46,-14],[48,-16],[49,-20],[48,-24],[46,-25],[44,-24],[43,-20],[44,-12]],
   ];
   continents.forEach(cont => {
     let p = 'M';
@@ -979,7 +1056,7 @@ function buildWorldMap() {
       p += (i === 0 ? '' : ' L') + x.toFixed(1) + ',' + y.toFixed(1);
     });
     p += ' Z';
-    svg += '<path d="' + p + '" fill="#1a2a1e" stroke="#2a4a2e" stroke-width="0.5" opacity="0.7"/>';
+    svg += '<path d="' + p + '" fill="#1a2a1e" stroke="#2a4a2e" stroke-width="0.7" opacity="0.7"/>';
   });
 
   /* subsolar point marker */
@@ -989,7 +1066,7 @@ function buildWorldMap() {
   svg += '<text x="' + (sx+10) + '" y="' + (sy+3) + '" fill="#ffaa44" font-size="8">Sub-solar</text>';
 
   /* labels */
-  svg += '<text x="' + (w/2) + '" y="10" fill="#3e4a5e" font-size="8" text-anchor="middle">Day/Night terminator — shaded area is nighttime (better HF propagation)</text>';
+  svg += '<text x="' + (w/2) + '" y="10" fill="#9aaec4" font-size="9" text-anchor="middle">Day/Night terminator — shaded area is nighttime (better HF propagation)</text>';
 
   svg += '</svg></div>';
 
@@ -1001,7 +1078,7 @@ function buildWorldMap() {
     '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:#1a2a1e"></div>Land masses</div>' +
     '</div>';
 
-  svg += '<p style="font-size:13px;color:#6a7a90;margin-top:6px">HF propagation on 7–30 MHz improves along nighttime paths where D-layer absorption is absent. ' +
+  svg += '<p style="font-size:13px;color:#a8b4c2;margin-top:6px">HF propagation on 7–30 MHz improves along nighttime paths where D-layer absorption is absent. ' +
     'Lower HF (3–7 MHz) works best for NVIS during day and medium-distance sky wave at night. ' +
     'VHF/UHF propagation is largely unaffected by ionosphere — line-of-sight dominates.</p>';
 
