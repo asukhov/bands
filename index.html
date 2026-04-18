@@ -24,7 +24,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 /* ── top bar ───────────────────────────────────────────────── */
 .top-bar{flex:0 0 32px;display:flex;align-items:center;padding:0 14px;
   background:linear-gradient(90deg,#0c0e16,#10131c);border-bottom:1px solid #1e2536;gap:10px;z-index:10}
-.top-bar .title{font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#00ff88;white-space:nowrap}
+.top-bar .title{font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#00ff88;white-space:nowrap;text-decoration:none;cursor:pointer}
 .top-bar .range{font-size:12px;color:#9aaabe;letter-spacing:1px}
 .top-bar .dot{width:6px;height:6px;border-radius:50%;background:#00ff88;box-shadow:0 0 6px #00ff88;animation:blink 2s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
@@ -106,7 +106,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .detail-panel{flex:1;overflow:hidden;opacity:0;transition:opacity .3s ease .1s;display:flex;flex-direction:column;
   background:linear-gradient(135deg,#0a0c14,#0d0f18);min-width:0}
 .detail-panel.open,.detail-panel:has(.intro){opacity:1}
-.detail-panel:has(.intro){overflow-y:auto}
 .detail-inner{padding:12px 16px;overflow-y:auto;flex:1;min-height:0}
 .detail-inner::-webkit-scrollbar{width:3px}
 .detail-inner::-webkit-scrollbar-thumb{background:#1e2536;border-radius:2px}
@@ -154,13 +153,13 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
 /* ── placeholder / empty state ─────────────────────────────── */
 .empty-state{flex:1;display:flex;align-items:center;justify-content:center;color:#6a7a8e;font-size:14px;letter-spacing:2px;text-transform:uppercase;user-select:none}
-.empty-state.intro{flex-direction:column;text-transform:none;letter-spacing:0;gap:0;padding:24px;max-width:520px;overflow-y:auto;align-items:center;justify-content:safe center}
-.intro-title{font-size:22px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
-.intro-wave{font-size:28px;letter-spacing:4px;margin-bottom:16px;opacity:.6;line-height:1}
-.intro-line{font-size:13px;color:#7a8a9e;line-height:1.7;text-align:center}
-.intro-line .key{display:inline-flex;align-items:center;justify-content:center;width:24px;height:22px;background:#1a1f2e;color:#a0b0c8;padding:0;border-radius:4px;font-size:13px;font-weight:600;border:1px solid #2a3040;margin:0 2px;vertical-align:middle;line-height:1}
+.empty-state.intro{flex-direction:column;text-transform:none;letter-spacing:0;gap:0;padding:16px;max-width:520px;overflow:hidden;align-items:center;justify-content:center}
+.intro-title{font-size:20px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.intro-wave{font-size:24px;letter-spacing:4px;margin-bottom:10px;opacity:.6;line-height:1}
+.intro-line{font-size:12px;color:#7a8a9e;line-height:1.6;text-align:center}
+.intro-line .key{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:18px;background:#1a1f2e;color:#a0b0c8;padding:0 4px;border-radius:3px;font-size:11px;font-weight:600;border:1px solid #2a3040;margin:0 1px;vertical-align:middle;line-height:1;font-family:'JetBrains Mono',monospace}
 .intro-line .accent{color:#00ff88}
-.intro-sep{width:60px;height:1px;background:linear-gradient(90deg,transparent,#2a3548,transparent);margin:10px auto}
+.intro-sep{width:40px;height:1px;background:linear-gradient(90deg,transparent,#2a3548,transparent);margin:6px auto}
 html.light .intro-title{color:#4a5568}
 html.light .intro-line{color:#5a6878}
 html.light .intro-line .key{background:#dce0e8;color:#2a3040;border-color:#c0c8d4}
@@ -335,7 +334,7 @@ html.light .ripple{background:rgba(0,0,0,.08)}
   <!-- top bar -->
   <div class="top-bar">
     <div class="dot"></div>
-    <span class="title">Radio Frequency Spectrum</span>
+    <a class="title" href="" onclick="location.reload();return false">Radio Frequency Spectrum</a>
     <span class="range">15 kHz — 5 GHz</span>
     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light / dark mode">
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1177,17 +1176,17 @@ function showIntro(){
   var el=$('#emptyState');
   el.className='empty-state intro';
   el.innerHTML=
-    '<div class="intro-wave">〜〜〜 📡 〜〜〜</div>'+
+    '<div class="intro-wave">∿∿∿ 📡 ∿∿∿</div>'+
     '<div class="intro-title" style="color:'+ tc('#33ff88') +'">RF Spectrum Explorer</div>'+
     '<div class="intro-line">Your pocket guide to <span class="accent">' + BANDS.reduce(function(n,b){return n+b.subs.length;},0) + ' sub‑bands</span> from 15 kHz to 5 GHz.</div>'+
     '<div class="intro-sep"></div>'+
     '<div class="intro-line">Pick a band on the left — or just smash the keyboard:</div>'+
     '<div class="intro-sep"></div>'+
-    '<div class="intro-line"><span class="key">▲</span> <span class="key">▼</span> hop between bands</div>'+
-    '<div class="intro-line"><span class="key">◀</span> <span class="key">▶</span> browse sub‑bands</div>'+
-    '<div class="intro-line"><span class="key">☽</span> toggle in the top‑right for <span class="accent">light mode</span></div>'+
+    '<div class="intro-line"><span class="key">Up</span> <span class="key">Dn</span> hop between bands</div>'+
+    '<div class="intro-line"><span class="key">Lt</span> <span class="key">Rt</span> browse sub‑bands</div>'+
+    '<div class="intro-line"><span class="key">D/L</span> toggle in the top‑right for <span class="accent">light mode</span></div>'+
     '<div class="intro-sep"></div>'+
-    '<div class="intro-line" style="opacity:.5;font-size:12px">Bonus: check out <strong>ABC</strong> (glossary) and <strong>PROP</strong> (propagation maps)</div>';
+    '<div class="intro-line" style="opacity:.5">Bonus: check out <strong>ABC</strong> (glossary) and <strong>PROP</strong> (propagation maps)</div>';
 }
 showIntro();
 
