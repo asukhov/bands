@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +33,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .main{flex:1;display:flex;overflow:hidden;min-height:0}
 
 /* ── left: band panel ──────────────────────────────────────── */
-.band-panel{flex:0 0 100px;display:flex;flex-direction:column;justify-content:safe center;gap:3px;padding:4px;
+.band-panel{flex:0 0 120px;display:flex;flex-direction:column;justify-content:safe center;gap:3px;padding:4px;
   background:linear-gradient(180deg,#0c0e16,#0e1018);border-right:1px solid #1a1f2e;z-index:5;overflow-y:auto;overflow-x:hidden}
 .band-panel::-webkit-scrollbar{width:2px}
 .band-panel::-webkit-scrollbar-thumb{background:#1e2536;border-radius:2px}
@@ -179,7 +179,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
 /* ── responsive: tablet ────────────────────────────────────── */
 @media(max-width:900px){
-  .band-panel{flex:0 0 82px;padding:5px 4px;gap:3px}
+  .band-panel{flex:0 0 100px;padding:5px 4px;gap:3px}
   .band-btn .label{font-size:14px}
   .band-btn .freq{font-size:8px}
   .sub-panel.open{flex-basis:175px}
@@ -211,6 +211,109 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
   body{overflow:auto}
   html{overflow:auto}
 }
+
+/* ── theme toggle button ───────────────────────────────────── */
+.theme-toggle{margin-left:auto;background:none;border:none;cursor:pointer;padding:2px 4px;display:flex;align-items:center;color:#9aaabe;transition:color .25s}
+.theme-toggle:hover{color:#c8ccd0}
+.theme-toggle svg{width:16px;height:16px}
+.theme-toggle .icon-sun{display:none}
+.light .theme-toggle{color:#5a6878}
+.light .theme-toggle:hover{color:#2a2e38}
+.light .theme-toggle .icon-sun{display:block}
+.light .theme-toggle .icon-moon{display:none}
+
+/* ── LIGHT MODE ────────────────────────────────────────────── */
+html.light,html.light body{background:#f0f2f6;color:#2a2e38}
+html.light body::after{background:none}
+
+/* top bar */
+html.light .top-bar{background:linear-gradient(90deg,#e6e8ee,#eaecf1);border-bottom-color:#c8cdd8}
+html.light .top-bar .title{color:#00885a}
+html.light .top-bar .range{color:#5a6878}
+html.light .top-bar .dot{background:#00885a;box-shadow:0 0 6px #00885a}
+
+/* band panel */
+html.light .band-panel{background:linear-gradient(180deg,#e6e8ee,#e8eaef);border-right-color:#c8cdd8}
+html.light .band-panel::-webkit-scrollbar-thumb{background:#c8cdd8}
+html.light .band-btn{background:linear-gradient(180deg,#dce0e8 0%,#e4e8f0 50%,#dce0e8 100%)}
+html.light .band-btn:hover{filter:brightness(0.95)}
+html.light .band-btn:hover .label{color:#2a3040}
+html.light .band-btn .freq{color:#6a7888}
+html.light .band-btn::after{opacity:.5}
+html.light .band-btn.active::after{opacity:1}
+
+/* band accent colours — light mode */
+html.light .band-btn[data-band="vlf"] .label{color:#cc4444}
+html.light .band-btn[data-band="vlf"].active .label{color:#bb2222}
+html.light .band-btn[data-band="lf"] .label{color:#bb6622}
+html.light .band-btn[data-band="lf"].active .label{color:#aa5500}
+html.light .band-btn[data-band="mf"] .label{color:#998811}
+html.light .band-btn[data-band="mf"].active .label{color:#887700}
+html.light .band-btn[data-band="hf"] .label{color:#558822}
+html.light .band-btn[data-band="hf"].active .label{color:#447700}
+html.light .band-btn[data-band="vhf"] .label{color:#228844}
+html.light .band-btn[data-band="vhf"].active .label{color:#117733}
+html.light .band-btn[data-band="uhf"] .label{color:#226688}
+html.light .band-btn[data-band="uhf"].active .label{color:#115577}
+html.light .band-btn[data-band="shf"] .label{color:#664499}
+html.light .band-btn[data-band="shf"].active .label{color:#553388}
+
+html.light .band-btn[data-band="glossary"] .label{color:#8898a8}
+html.light .band-btn[data-band="glossary"].active .label{color:#2277cc}
+html.light .band-btn[data-band="glossary"]::after{background:#2277cc}
+html.light .band-btn[data-band="propagation"] .label{color:#8898a8}
+html.light .band-btn[data-band="propagation"].active .label{color:#cc7700}
+html.light .band-btn[data-band="propagation"]::after{background:#cc7700}
+
+html.light .band-sep{background:linear-gradient(90deg,transparent,#c8cdd8,transparent)}
+
+/* sub panel */
+html.light .sub-panel{background:#eef0f4;border-right-color:#c8cdd8}
+html.light .sub-panel-inner::-webkit-scrollbar-thumb{background:#c8cdd8}
+html.light .sub-panel-header{color:#5a6878}
+html.light .sub-btn{color:#5a6878;background:linear-gradient(180deg,#eef0f400,#e8eaef)}
+html.light .sub-btn:hover{background:linear-gradient(180deg,#dde0e8,#e0e4ec);color:#2a3040}
+html.light .sub-btn.active{color:#1a1e28;background:linear-gradient(180deg,#d4d8e2,#dce0ea)}
+html.light .sub-btn .sub-freq{color:#6a7888}
+html.light .sub-btn.active .sub-freq{color:#4a5868}
+
+/* detail panel */
+html.light .detail-panel{background:linear-gradient(135deg,#f0f2f6,#eceff3)}
+html.light .detail-inner::-webkit-scrollbar-thumb{background:#c8cdd8}
+html.light .detail-subtitle{color:#5a6878}
+html.light .detail-table th{color:#4a6080;border-bottom-color:#d0d5e0}
+html.light .detail-table td{color:#2a3040;border-bottom-color:#e0e4ec}
+html.light .wave-vis .wave-label{color:#5a6878}
+
+/* glossary */
+html.light .glossary-item{border-bottom-color:#dce0e8}
+html.light .glossary-item:nth-child(odd){border-right-color:#dce0e8}
+html.light .glossary-term{color:#2266bb}
+html.light .glossary-def{color:#3a4558}
+html.light .glossary-cat{color:#4a6080;border-bottom-color:#d0d5e0}
+
+/* propagation */
+html.light .prop-section h3{color:#cc7700}
+html.light .prop-section p{color:#3a4558}
+html.light .prop-legend-item{color:#4a5568}
+
+/* WKF */
+html.light .wkf-section{border-top-color:#d0d5e0}
+html.light .wkf-section h3{color:#8a6020}
+html.light .wkf-region h4.wkf-uk{color:#1166cc;border-color:#1166cc}
+html.light .wkf-region h4.wkf-usa{color:#cc3322;border-color:#cc3322}
+html.light .wkf-region h4.wkf-ru{color:#bb8800;border-color:#bb8800}
+html.light .wkf-table th{color:#7a5530;border-bottom-color:#d0d5e0}
+html.light .wkf-table td{color:#2a2e38;border-bottom-color:#e0e4ec}
+html.light .wkf-table .wkf-freq{color:#2a3040}
+html.light .wkf-table .wkf-mod{color:#7a5530}
+
+/* empty state & bottom bar */
+html.light .empty-state{color:#8a94a0}
+html.light .bottom-bar{background:#e6e8ee;border-top-color:#c8cdd8;color:#5a6878}
+
+/* ripple */
+html.light .ripple{background:rgba(0,0,0,.08)}
 </style>
 </head>
 <body>
@@ -221,6 +324,10 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
     <div class="dot"></div>
     <span class="title">Radio Frequency Spectrum</span>
     <span class="range">15 kHz — 5 GHz</span>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light / dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
   </div>
 
   <!-- main three‑panel area -->
@@ -1022,6 +1129,36 @@ let activeSpecial = null;   /* 'glossary' | 'propagation' | null */
 
 const $ = s => document.querySelector(s);
 
+/* ── theme helpers ─────────────────────────────────────────── */
+const LIGHT_COLORS = {
+  '#ff4444':'#cc2222','#ff8833':'#cc6600','#ffc833':'#aa8800',
+  '#aaff33':'#669900','#33ff88':'#00884a','#33aaff':'#0077cc',
+  '#aa66ff':'#7744cc','#88ccff':'#2277cc','#ffaa44':'#cc7700'
+};
+function isLight(){ return document.documentElement.classList.contains('light'); }
+function tc(c){ return isLight() ? (LIGHT_COLORS[c]||c) : c; }
+
+function toggleTheme(){
+  document.documentElement.classList.toggle('light');
+  try{ localStorage.setItem('rf-theme', isLight()?'light':'dark'); }catch(e){}
+  refreshCurrentView();
+}
+function refreshCurrentView(){
+  if(activeSpecial==='glossary') openGlossary();
+  else if(activeSpecial==='propagation') openPropagation();
+  else{
+    var band=BANDS.find(function(b){return b.id===activeBand;});
+    if(band && activeSub){
+      var sub=band.subs.find(function(s){return s.name===activeSub;});
+      var el=document.querySelector('#subInner .sub-btn.active');
+      if(sub && el) selectSub(band,sub,el);
+    }
+  }
+}
+(function initTheme(){
+  try{if(localStorage.getItem('rf-theme')==='light') document.documentElement.classList.add('light');}catch(e){}
+})();
+
 /* count total sub-bands */
 const totalSubs = BANDS.reduce((n, b) => n + b.subs.length, 0);
 $('#bandCount').textContent = BANDS.length + ' bands / ' + totalSubs + ' entries';
@@ -1098,8 +1235,8 @@ function selectSub(band, sub, el) {
   $('#detailPanel').classList.add('open');
 
   d.innerHTML =
-    '<div class="accent-bar" style="background:' + band.color + '"></div>' +
-    '<div class="detail-title" style="color:' + band.color + '">' + sub.name + '</div>' +
+    '<div class="accent-bar" style="background:' + tc(band.color) + '"></div>' +
+    '<div class="detail-title" style="color:' + tc(band.color) + '">' + sub.name + '</div>' +
     '<div class="detail-subtitle">' + band.full + ' — ' + band.range + '</div>' +
     '<table class="detail-table">' +
       row('Frequency', sub.freq) +
@@ -1209,8 +1346,8 @@ function openGlossary() {
   $('#emptyState').style.display = 'none';
   $('#detailPanel').classList.add('open');
 
-  let html = '<div class="accent-bar" style="background:#88ccff"></div>' +
-    '<div class="detail-title" style="color:#88ccff">Glossary — Terms & Abbreviations</div>' +
+  let html = '<div class="accent-bar" style="background:' + tc('#88ccff') + '"></div>' +
+    '<div class="detail-title" style="color:' + tc('#88ccff') + '">Glossary — Terms & Abbreviations</div>' +
     '<div class="detail-subtitle">Every term and abbreviation used on this page, explained</div>' +
     '<div class="glossary-grid">';
 
@@ -1242,8 +1379,8 @@ function openPropagation() {
   $('#detailPanel').classList.add('open');
 
   d.innerHTML =
-    '<div class="accent-bar" style="background:#ffaa44"></div>' +
-    '<div class="detail-title" style="color:#ffaa44">Signal Propagation</div>' +
+    '<div class="accent-bar" style="background:' + tc('#ffaa44') + '"></div>' +
+    '<div class="detail-title" style="color:' + tc('#ffaa44') + '">Signal Propagation</div>' +
     '<div class="detail-subtitle">Atmospheric layers, propagation modes & real-time day/night map</div>' +
     buildAtmoDiagram() +
     buildPropModes() +
@@ -1253,6 +1390,7 @@ function openPropagation() {
 
 /* ── Atmosphere layers diagram (SVG) ──────────────────────── */
 function buildAtmoDiagram() {
+  const lt = isLight();
   const w = 900, h = 400;
   /* layers: name, bottom altitude (km), top (km), colour, opacity */
   const layers = [
@@ -1275,13 +1413,13 @@ function buildAtmoDiagram() {
     '<svg class="atmo-diagram" viewBox="0 0 ' + w + ' ' + h + '">';
 
   /* background */
-  svg += '<rect x="0" y="0" width="' + w + '" height="' + h + '" fill="#0a0c14" rx="4"/>';
+  svg += '<rect x="0" y="0" width="' + w + '" height="' + h + '" fill="' + (lt?'#f0f2f6':'#0a0c14') + '" rx="4"/>';
 
   /* altitude axis */
   [0, 50, 100, 200, 300, 400, 500].forEach(alt => {
     const y = scale(alt);
-    svg += '<line x1="55" y1="' + y + '" x2="' + (w-10) + '" y2="' + y + '" stroke="#1a1f2e" stroke-width="0.5" stroke-dasharray="3,3"/>';
-    svg += '<text x="50" y="' + (y+4) + '" fill="#a0b0c8" font-size="11" text-anchor="end">' + alt + ' km</text>';
+    svg += '<line x1="55" y1="' + y + '" x2="' + (w-10) + '" y2="' + y + '" stroke="' + (lt?'#d0d5e0':'#1a1f2e') + '" stroke-width="0.5" stroke-dasharray="3,3"/>';
+    svg += '<text x="50" y="' + (y+4) + '" fill="' + (lt?'#5a6878':'#a0b0c8') + '" font-size="11" text-anchor="end">' + alt + ' km</text>';
   });
 
   /* draw layers */
@@ -1290,33 +1428,33 @@ function buildAtmoDiagram() {
     const y2 = scale(l.bot);
     svg += '<rect x="65" y="' + y1 + '" width="' + (w-85) + '" height="' + (y2-y1) + '" fill="' + l.color + '" opacity="0.4" rx="2"/>';
     const mid = (y1 + y2) / 2;
-    svg += '<text x="75" y="' + (mid+4) + '" fill="#d0dce8" font-size="13" font-weight="600">' + l.name + '</text>';
-    svg += '<text x="' + (w-20) + '" y="' + (mid+4) + '" fill="#c0ccd8" font-size="11" text-anchor="end">' + l.note + '</text>';;
+    svg += '<text x="75" y="' + (mid+4) + '" fill="' + (lt?'#2a3040':'#d0dce8') + '" font-size="13" font-weight="600">' + l.name + '</text>';
+    svg += '<text x="' + (w-20) + '" y="' + (mid+4) + '" fill="' + (lt?'#3a4558':'#c0ccd8') + '" font-size="11" text-anchor="end">' + l.note + '</text>';;
   });
 
   /* Earth surface */
   const ground = scale(0);
-  svg += '<rect x="65" y="' + ground + '" width="' + (w-85) + '" height="6" fill="#1a3020" rx="1"/>';
-  svg += '<text x="75" y="' + (ground+20) + '" fill="#8abba0" font-size="11" font-weight="500">Earth Surface</text>';
+  svg += '<rect x="65" y="' + ground + '" width="' + (w-85) + '" height="6" fill="' + (lt?'#a8d4a8':'#1a3020') + '" rx="1"/>';
+  svg += '<text x="75" y="' + (ground+20) + '" fill="' + (lt?'#2a7a50':'#8abba0') + '" font-size="11" font-weight="500">Earth Surface</text>';
 
   /* draw propagation arrows */
   /* Sky wave — bouncing off F2 (draw first, behind other elements) */
   const f2mid = (scale(500) + scale(250)) / 2;
   const skyX1 = 160, skyPeakX = w/3 + 10, skyX2 = w*2/3 - 30;
-  svg += '<path d="M' + skyX1 + ',' + (ground-3) + ' L' + skyPeakX + ',' + (f2mid+10) + ' L' + skyX2 + ',' + (ground-3) + '" fill="none" stroke="#aaff33" stroke-width="2"/>';
-  svg += '<text x="' + (skyPeakX+15) + '" y="' + (f2mid-2) + '" fill="#aaff33" font-size="11" font-weight="500">Sky Wave / F2 (HF)</text>';
+  svg += '<path d="M' + skyX1 + ',' + (ground-3) + ' L' + skyPeakX + ',' + (f2mid+10) + ' L' + skyX2 + ',' + (ground-3) + '" fill="none" stroke="' + (lt?'#669900':'#aaff33') + '" stroke-width="2"/>';
+  svg += '<text x="' + (skyPeakX+15) + '" y="' + (f2mid-2) + '" fill="' + (lt?'#669900':'#aaff33') + '" font-size="11" font-weight="500">Sky Wave / F2 (HF)</text>';
 
   /* Line of sight — short line near ground */
   const losY = ground - 12;
-  svg += '<line x1="' + skyX1 + '" y1="' + losY + '" x2="' + ((skyX1 + skyX2)/2) + '" y2="' + losY + '" stroke="#33ff88" stroke-width="2"/>';
+  svg += '<line x1="' + skyX1 + '" y1="' + losY + '" x2="' + ((skyX1 + skyX2)/2) + '" y2="' + losY + '" stroke="' + (lt?'#00884a':'#33ff88') + '" stroke-width="2"/>';
   /* Label above the green LoS line */
   const losMidX = (skyX1 + (skyX1 + skyX2)/2) / 2;
-  svg += '<text x="' + losMidX + '" y="' + (losY - 6) + '" fill="#33ff88" font-size="11" font-weight="500" text-anchor="middle">Line of Sight (VHF/UHF/SHF)</text>';
+  svg += '<text x="' + losMidX + '" y="' + (losY - 6) + '" fill="' + (lt?'#00884a':'#33ff88') + '" font-size="11" font-weight="500" text-anchor="middle">Line of Sight (VHF/UHF/SHF)</text>';
 
   /* Ground wave — curved line along surface */
-  svg += '<path d="M100,' + (ground-2) + ' Q' + (w/2) + ',' + (ground-30) + ' ' + (w-120) + ',' + (ground-2) + '" fill="none" stroke="#ffc833" stroke-width="2" stroke-dasharray="4,2"/>';
+  svg += '<path d="M100,' + (ground-2) + ' Q' + (w/2) + ',' + (ground-30) + ' ' + (w-120) + ',' + (ground-2) + '" fill="none" stroke="' + (lt?'#aa8800':'#ffc833') + '" stroke-width="2" stroke-dasharray="4,2"/>';
   /* Label below the line */
-  svg += '<text x="' + (w/2) + '" y="' + (ground + 38) + '" fill="#ffc833" font-size="11" font-weight="500" text-anchor="middle">Ground Wave (LF/MF)</text>';
+  svg += '<text x="' + (w/2) + '" y="' + (ground + 38) + '" fill="' + (lt?'#aa8800':'#ffc833') + '" font-size="11" font-weight="500" text-anchor="middle">Ground Wave (LF/MF)</text>';
 
   svg += '</svg></div>';
   return svg;
@@ -1339,6 +1477,7 @@ function buildPropModes() {
 
 /* ── Day/Night World Map ──────────────────────────────────── */
 function buildWorldMap() {
+  const lt = isLight();
   const w = 880, h = 400;
   const now = new Date();
 
@@ -1360,18 +1499,18 @@ function buildWorldMap() {
     '<div class="world-map-wrap"><svg viewBox="0 0 ' + w + ' ' + h + '">';
 
   /* background */
-  svg += '<rect x="0" y="0" width="' + w + '" height="' + h + '" fill="#0a0c14" rx="4"/>';
+  svg += '<rect x="0" y="0" width="' + w + '" height="' + h + '" fill="' + (lt?'#f0f2f6':'#0a0c14') + '" rx="4"/>';
 
   /* draw grid lines */
   for (let lon = -180; lon <= 180; lon += 30) {
     const [x] = lonLatToXY(lon, 0);
-    svg += '<line x1="' + x + '" y1="15" x2="' + x + '" y2="' + (h-25) + '" stroke="#131720" stroke-width="0.5"/>';
-    if (lon % 60 === 0) svg += '<text x="' + x + '" y="' + (h-14) + '" fill="#7a8a9e" font-size="8" text-anchor="middle">' + (lon >= 0 ? lon + '°E' : (-lon) + '°W') + '</text>';
+    svg += '<line x1="' + x + '" y1="15" x2="' + x + '" y2="' + (h-25) + '" stroke="' + (lt?'#d0d5e0':'#131720') + '" stroke-width="0.5"/>';
+    if (lon % 60 === 0) svg += '<text x="' + x + '" y="' + (h-14) + '" fill="' + (lt?'#5a6878':'#7a8a9e') + '" font-size="8" text-anchor="middle">' + (lon >= 0 ? lon + '°E' : (-lon) + '°W') + '</text>';
   }
   for (let lat = -60; lat <= 60; lat += 30) {
     const [, y] = lonLatToXY(0, lat);
-    svg += '<line x1="40" y1="' + y + '" x2="' + (w-40) + '" y2="' + y + '" stroke="#131720" stroke-width="0.5"/>';
-    svg += '<text x="36" y="' + (y+3) + '" fill="#7a8a9e" font-size="8" text-anchor="end">' + (lat >= 0 ? lat + '°N' : (-lat) + '°S') + '</text>';
+    svg += '<line x1="40" y1="' + y + '" x2="' + (w-40) + '" y2="' + y + '" stroke="' + (lt?'#d0d5e0':'#131720') + '" stroke-width="0.5"/>';
+    svg += '<text x="36" y="' + (y+3) + '" fill="' + (lt?'#5a6878':'#7a8a9e') + '" font-size="8" text-anchor="end">' + (lat >= 0 ? lat + '°N' : (-lat) + '°S') + '</text>';
   }
 
   /* draw night polygon */
@@ -1404,7 +1543,7 @@ function buildWorldMap() {
     nightPoints.forEach(p => { const [x,y] = lonLatToXY(p.lon, p.lat); nightPath += ' L' + x + ',' + y; });
     nightPath += ' L' + lonLatToXY(180, -90).join(',') + ' Z';
   }
-  svg += '<path d="' + nightPath + '" fill="#000820" opacity="0.5"/>';
+  svg += '<path d="' + nightPath + '" fill="' + (lt?'#b0b8d0':'#000820') + '" opacity="' + (lt?'0.35':'0.5') + '"/>';
 
   /* draw terminator line */
   let termPath = 'M';
@@ -1412,7 +1551,7 @@ function buildWorldMap() {
     const [x, y] = lonLatToXY(p.lon, p.lat);
     termPath += (i === 0 ? '' : ' L') + x + ',' + y;
   });
-  svg += '<path d="' + termPath + '" fill="none" stroke="#ffaa44" stroke-width="1.5" opacity="0.7"/>';
+  svg += '<path d="' + termPath + '" fill="none" stroke="' + (lt?'#cc7700':'#ffaa44') + '" stroke-width="1.5" opacity="0.7"/>';
 
   /* simplified continent outlines — major land masses as polygons */
   /* simplified continent outlines — clean single-pass loops */
@@ -1469,29 +1608,29 @@ function buildWorldMap() {
       p += (i === 0 ? '' : ' L') + x.toFixed(1) + ',' + y.toFixed(1);
     });
     p += ' Z';
-    svg += '<path d="' + p + '" fill="#1a2a1e" stroke="#2a4a2e" stroke-width="0.7" opacity="0.7"/>';
+    svg += '<path d="' + p + '" fill="' + (lt?'#a8c8a8':'#1a2a1e') + '" stroke="' + (lt?'#7aaa7a':'#2a4a2e') + '" stroke-width="0.7" opacity="0.7"/>';
   });
 
   /* subsolar point marker */
   const [sx, sy] = lonLatToXY(subsolarLon, declination);
-  svg += '<circle cx="' + sx + '" cy="' + sy + '" r="4" fill="#ffaa44" opacity="0.8"/>';
-  svg += '<circle cx="' + sx + '" cy="' + sy + '" r="8" fill="none" stroke="#ffaa44" stroke-width="0.5" opacity="0.5"/>';
-  svg += '<text x="' + (sx+10) + '" y="' + (sy+3) + '" fill="#ffaa44" font-size="8">Sub-solar</text>';
+  svg += '<circle cx="' + sx + '" cy="' + sy + '" r="4" fill="' + (lt?'#cc7700':'#ffaa44') + '" opacity="0.8"/>';
+  svg += '<circle cx="' + sx + '" cy="' + sy + '" r="8" fill="none" stroke="' + (lt?'#cc7700':'#ffaa44') + '" stroke-width="0.5" opacity="0.5"/>';
+  svg += '<text x="' + (sx+10) + '" y="' + (sy+3) + '" fill="' + (lt?'#cc7700':'#ffaa44') + '" font-size="8">Sub-solar</text>';
 
   /* labels */
-  svg += '<text x="' + (w/2) + '" y="10" fill="#9aaec4" font-size="9" text-anchor="middle">Day/Night terminator — shaded area is nighttime (better HF propagation)</text>';
+  svg += '<text x="' + (w/2) + '" y="10" fill="' + (lt?'#5a6878':'#9aaec4') + '" font-size="9" text-anchor="middle">Day/Night terminator — shaded area is nighttime (better HF propagation)</text>';
 
   svg += '</svg></div>';
 
   /* legend */
   svg += '<div class="prop-legend">' +
     '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:#ffaa44"></div>Terminator line</div>' +
-    '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:#000820;border:1px solid #1a2a3a"></div>Nighttime (sky wave active)</div>' +
-    '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:#0a0c14;border:1px solid #1a2a3a"></div>Daytime (D-layer absorbs lower HF)</div>' +
-    '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:#1a2a1e"></div>Land masses</div>' +
+    '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:' + (lt?'#b0b8d0':'#000820') + ';border:1px solid ' + (lt?'#8898a8':'#1a2a3a') + '"></div>Nighttime (sky wave active)</div>' +
+    '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:' + (lt?'#f0f2f6':'#0a0c14') + ';border:1px solid ' + (lt?'#c8cdd8':'#1a2a3a') + '"></div>Daytime (D-layer absorbs lower HF)</div>' +
+    '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:' + (lt?'#a8c8a8':'#1a2a1e') + '"></div>Land masses</div>' +
     '</div>';
 
-  svg += '<p style="font-size:13px;color:#a8b4c2;margin-top:6px">HF propagation on 7–30 MHz improves along nighttime paths where D-layer absorption is absent. ' +
+  svg += '<p style="font-size:13px;color:' + (lt?'#4a5568':'#a8b4c2') + ';margin-top:6px">HF propagation on 7–30 MHz improves along nighttime paths where D-layer absorption is absent. ' +
     'Lower HF (3–7 MHz) works best for NVIS during day and medium-distance sky wave at night. ' +
     'VHF/UHF propagation is largely unaffected by ionosphere — line-of-sight dominates.</p>';
 
