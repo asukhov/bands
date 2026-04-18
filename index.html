@@ -154,6 +154,21 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 /* ── placeholder / empty state ─────────────────────────────── */
 .empty-state{flex:1;display:flex;align-items:center;justify-content:center;color:#6a7a8e;font-size:14px;letter-spacing:2px;text-transform:uppercase;user-select:none}
 
+/* ── well-known frequencies section ────────────────────────── */
+.wkf-section{margin-top:12px;border-top:1px solid #1a1f2e;padding-top:10px}
+.wkf-section h3{font-size:13px;font-weight:600;color:#e0b888;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.wkf-region{margin-bottom:10px}
+.wkf-region h4{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;padding:3px 8px;border-left:3px solid;display:inline-block}
+.wkf-region h4.wkf-uk{color:#55aaff;border-color:#55aaff}
+.wkf-region h4.wkf-usa{color:#ff6655;border-color:#ff6655}
+.wkf-region h4.wkf-ru{color:#ffcc33;border-color:#ffcc33}
+.wkf-table{width:100%;border-collapse:collapse;margin-bottom:6px}
+.wkf-table th{text-align:left;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#d4a574;padding:4px 8px;border-bottom:1px solid #1a1f2e;white-space:nowrap}
+.wkf-table td{font-size:12px;color:#c8ccd0;padding:3px 8px;border-bottom:1px solid #0e1118}
+.wkf-table tr:last-child td{border-bottom:none}
+.wkf-table .wkf-freq{color:#e8e0d8;font-weight:500;white-space:nowrap}
+.wkf-table .wkf-mod{color:#d4a574;white-space:nowrap}
+
 /* ── bottom bar ────────────────────────────────────────────── */
 .bottom-bar{flex:0 0 24px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;
   background:#0c0e16;border-top:1px solid #1a1f2e;font-size:12px;color:#7a8a9e;letter-spacing:1px}
@@ -526,6 +541,10 @@ const GLOSSARY = [
   { term:'AM',   def:'Amplitude Modulation — signal encoded as changes in wave amplitude' },
   { term:'FM',   def:'Frequency Modulation — signal encoded as changes in wave frequency' },
   { term:'SSB',  def:'Single Sideband — AM variant that transmits only one sideband, saving bandwidth and power' },
+  { term:'USB',  def:'Upper Sideband — SSB mode transmitting frequencies above the suppressed carrier; standard above 10 MHz and on all VHF+ bands' },
+  { term:'LSB',  def:'Lower Sideband — SSB mode transmitting frequencies below the suppressed carrier; standard below 10 MHz by convention' },
+  { term:'J3E',  def:'ITU emission designator for SSB with suppressed carrier (voice); the mode used for USB and LSB phone' },
+  { term:'F3E',  def:'ITU emission designator for FM telephony (voice); standard for VHF/UHF FM amateur and PMR' },
   { term:'DSB-FC', def:'Double Sideband Full Carrier — standard AM broadcasting with both sidebands and carrier' },
   { term:'CW',   def:'Continuous Wave — unmodulated carrier keyed on/off for Morse code' },
   { term:'OOK',  def:'On-Off Keying — simplest digital modulation: carrier present = 1, absent = 0' },
@@ -640,6 +659,16 @@ const GLOSSARY = [
   { term:'BLE',   def:'Bluetooth Low Energy — power-efficient Bluetooth variant for IoT, beacons, sensors' },
   { term:'Zigbee', def:'IEEE 802.15.4-based wireless protocol for low-power IoT mesh networks' },
   { term:'Thread', def:'IPv6-based mesh networking protocol for IoT devices; runs on 802.15.4 radio' },
+  { term:'LoRa',  def:'Long Range — chirp spread spectrum modulation for low-power wide-area IoT networks; range up to 15 km' },
+  { term:'FMCW',  def:'Frequency Modulated Continuous Wave — radar technique sweeping frequency for range/velocity measurement' },
+  { term:'FDMA',  def:'Frequency Division Multiple Access — each user allocated a distinct frequency channel (used in GLONASS L1)' },
+  { term:'PMR446', def:'Private Mobile Radio 446 MHz — European licence-free personal radio service; 500 mW ERP' },
+  { term:'FRS',   def:'Family Radio Service — US licence-free UHF personal radio on 462/467 MHz; up to 2 W' },
+  { term:'GMRS',  def:'General Mobile Radio Service — US UHF personal radio requiring licence; up to 50 W on some channels' },
+  { term:'CBRS',  def:'Citizens Broadband Radio Service — US shared 3.5 GHz spectrum for 5G/LTE; three-tier access model' },
+  { term:'ARISS', def:'Amateur Radio on the International Space Station — programme enabling ham contacts with ISS crew' },
+  { term:'OIRT',  def:'Organisation Internationale de Radiodiffusion — used FM band I (66-74 MHz) in Soviet/Russian broadcasting' },
+  { term:'DFS',   def:'Dynamic Frequency Selection — radar avoidance mechanism required for WiFi on 5 GHz channels' },
   { term:'NEXRAD', def:'Next-Generation Radar (WSR-88D) — US national network of S-band Doppler weather radars' },
   { term:'TDWR',  def:'Terminal Doppler Weather Radar — airport wind-shear detection radar' },
   { term:'ATC',   def:'Air Traffic Control' },
@@ -655,6 +684,120 @@ const GLOSSARY = [
 /* ═══════════════════════════════════════════════════════════
    APP STATE & HELPERS
    ═══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════
+   WELL-KNOWN FREQUENCIES — curated per band, per region
+   Key: band id → array of { freq, call, mode, region, desc }
+   region: 'UK','USA','RU'   mode includes USB/LSB detail
+   ══════════════════════════════════════════════════════════════ */
+const WKF = {
+  vlf: [
+    { freq:'16 kHz', call:'GBR', mode:'CW/MSK', region:'UK', desc:'Royal Navy Anthorn — submarine broadcast' },
+    { freq:'19.6 kHz', call:'GQD', mode:'MSK', region:'UK', desc:'Anthorn NATO submarine comms' },
+    { freq:'21.4 kHz', call:'NSS', mode:'MSK', region:'USA', desc:'USN Annapolis — submarine broadcast' },
+    { freq:'24.0 kHz', call:'NAA', mode:'MSK', region:'USA', desc:'USN Cutler, Maine — most powerful VLF' },
+    { freq:'24.8 kHz', call:'NLK', mode:'MSK', region:'USA', desc:'USN Jim Creek, Washington' },
+    { freq:'25.2 kHz', call:'NLM', mode:'MSK', region:'USA', desc:'USN LaMoure, North Dakota' },
+    { freq:'20.27 kHz', call:'ICV', mode:'CW/MSK', region:'RU', desc:'Russian Navy Krasnodar VLF' },
+    { freq:'18.1 kHz', call:'RJH69', mode:'MSK', region:'RU', desc:'Russian Navy Matveevo — sub comms' },
+    { freq:'18.9 kHz', call:'—', mode:'MSK', region:'RU', desc:'Russian Navy Vileyka, Belarus' },
+    { freq:'22.1 kHz', call:'—', mode:'MSK', region:'RU', desc:'Russian Navy Arkhangelsk — Arctic sub ops' },
+  ],
+  lf: [
+    { freq:'60 kHz', call:'MSF', mode:'OOK (on/off)', region:'UK', desc:'NPL time signal — radio-controlled clocks' },
+    { freq:'198 kHz', call:'BBC R4', mode:'AM (DSB-FC)', region:'UK', desc:'BBC Radio 4 longwave from Droitwich' },
+    { freq:'252 kHz', call:'RTÉ R1', mode:'AM', region:'UK', desc:'RTÉ Radio 1 — receivable across UK/Ireland' },
+    { freq:'60 kHz', call:'WWVB', mode:'OOK/PM', region:'USA', desc:'NIST Fort Collins — atomic clock time signal' },
+    { freq:'100 kHz', call:'LORAN', mode:'Pulse', region:'USA', desc:'eLoran stations — GPS backup navigation' },
+    { freq:'190 kHz', call:'—', mode:'AM/CW', region:'USA', desc:'NDB beacons — aviation approach navigation' },
+    { freq:'66.66 kHz', call:'RBU', mode:'OOK', region:'RU', desc:'Russian time signal — Moscow region' },
+    { freq:'50 kHz', call:'RWM', mode:'CW/AM', region:'RU', desc:'Russian standard freq/time — 5/10/15 MHz too' },
+    { freq:'171 kHz', call:'R. Rossii', mode:'AM (DSB-FC)', region:'RU', desc:'Radio Rossii LW from Bolshakovo (1200 kW)' },
+    { freq:'261 kHz', call:'R. Rossii', mode:'AM (DSB-FC)', region:'RU', desc:'Radio Rossii LW Tbilisskaya transmitter' },
+  ],
+  mf: [
+    { freq:'909 kHz', call:'BBC R5L', mode:'AM (DSB-FC)', region:'UK', desc:'BBC Radio 5 Live — sport and news' },
+    { freq:'693 kHz', call:'BBC R5L', mode:'AM (DSB-FC)', region:'UK', desc:'BBC Radio 5 Live alternate transmitter' },
+    { freq:'1215 kHz', call:'Absolute', mode:'AM', region:'UK', desc:'Absolute Radio (ex-Virgin) national AM' },
+    { freq:'1089 kHz', call:'TalkSPORT', mode:'AM', region:'UK', desc:'TalkSPORT national — highest power UK MW' },
+    { freq:'1.8 MHz', call:'Top Band', mode:'CW/FT8/LSB', region:'UK', desc:'160 m amateur — LSB below 10 MHz convention' },
+    { freq:'660 kHz', call:'WFAN', mode:'AM (DSB-FC)', region:'USA', desc:'WFAN New York — sports radio flagship' },
+    { freq:'720 kHz', call:'WGN', mode:'AM (DSB-FC)', region:'USA', desc:'WGN Chicago — legendary 50 kW clear-channel' },
+    { freq:'1100 kHz', call:'WTAM', mode:'AM', region:'USA', desc:'WTAM Cleveland — iHeart news/talk, 50 kW' },
+    { freq:'1500 kHz', call:'WFED', mode:'AM', region:'USA', desc:'Federal News Network Washington DC' },
+    { freq:'2.182 MHz', call:'Distress', mode:'USB (J3E)', region:'USA', desc:'Maritime distress & calling frequency' },
+    { freq:'549 kHz', call:'Mayak', mode:'AM (DSB-FC)', region:'RU', desc:'Radio Mayak — news/music, nationwide 150 kW' },
+    { freq:'873 kHz', call:'R. Rossii', mode:'AM (DSB-FC)', region:'RU', desc:'Radio Rossii MW — Moscow region' },
+    { freq:'1413 kHz', call:'Vesti FM', mode:'AM', region:'RU', desc:'Vesti FM on mediumwave — news network' },
+    { freq:'1.8 MHz', call:'Top Band', mode:'CW/FT8/LSB', region:'RU', desc:'160 m amateur — popular winter DX band' },
+  ],
+  hf: [
+    { freq:'3.900 MHz', call:'80 m LSB', mode:'LSB (J3E)', region:'UK', desc:'80 m phone segment — LSB by convention below 10 MHz' },
+    { freq:'5.354 MHz', call:'60 m', mode:'USB (J3E)', region:'UK', desc:'60 m channelised amateur — USB; UK pioneered allocation' },
+    { freq:'7.074 MHz', call:'40 m FT8', mode:'FT8 (GFSK)', region:'UK', desc:'40 m FT8 calling freq — highest activity digital' },
+    { freq:'14.100 MHz', call:'NCDXF', mode:'CW', region:'UK', desc:'Northern California DX Foundation beacon network' },
+    { freq:'14.300 MHz', call:'IARN', mode:'USB (J3E)', region:'UK', desc:'Intl Amateur Radio emergency net — USB' },
+    { freq:'5.330.5 MHz', call:'Ch 1', mode:'USB (J3E)', region:'USA', desc:'US 60 m Channel 1 — emergency primary' },
+    { freq:'7.185 MHz', call:'SATERN', mode:'LSB (J3E)', region:'USA', desc:'Salvation Army emergency net — 40 m LSB' },
+    { freq:'14.074 MHz', call:'20 m FT8', mode:'FT8 (GFSK)', region:'USA', desc:'20 m FT8 — world busiest digital frequency' },
+    { freq:'14.236 MHz', call:'SSTV', mode:'USB (J3E)', region:'USA', desc:'ISS SSTV downlink — amateur slow-scan TV' },
+    { freq:'7.200 MHz', call:'ARRL', mode:'LSB (J3E)', region:'USA', desc:'ARRL Newsline / traffic nets — 40 m phone' },
+    { freq:'3.840 MHz', call:'3rd dist', mode:'LSB (J3E)', region:'RU', desc:'Russian 80 m phone activity — LSB' },
+    { freq:'7.050 MHz', call:'40 m CW', mode:'CW', region:'RU', desc:'Russian 40 m CW activity centre' },
+    { freq:'14.074 MHz', call:'20 m FT8', mode:'FT8 (GFSK)', region:'RU', desc:'20 m FT8 — massive Russian activity' },
+    { freq:'7.130 MHz', call:'R. Rossii', mode:'AM (DSB-FC)', region:'RU', desc:'Radio Rossii SW relay on 41 m band' },
+    { freq:'9.530 MHz', call:'R. Rossii', mode:'AM (DSB-FC)', region:'RU', desc:'Radio Rossii intl SW service 31 m' },
+    { freq:'21.074 MHz', call:'15 m FT8', mode:'FT8 (GFSK)', region:'RU', desc:'15 m FT8 — solar max DX favourite' },
+  ],
+  vhf: [
+    { freq:'145.500 MHz', call:'S20', mode:'FM (F3E)', region:'UK', desc:'2 m FM calling frequency — UK/Europe' },
+    { freq:'144.300 MHz', call:'SSB call', mode:'USB (J3E)', region:'UK', desc:'2 m SSB/CW calling — always USB above 30 MHz' },
+    { freq:'145.800 MHz', call:'ISS', mode:'FM (F3E)', region:'UK', desc:'ISS amateur downlink — ARISS contacts' },
+    { freq:'87.7 MHz', call:'BBC R2', mode:'WBFM', region:'UK', desc:'BBC Radio 2 — UK highest-rated FM station' },
+    { freq:'156.800 MHz', call:'Ch 16', mode:'FM (F3E)', region:'UK', desc:'Marine VHF Ch 16 — intl distress/calling' },
+    { freq:'146.520 MHz', call:'National', mode:'FM (F3E)', region:'USA', desc:'2 m FM national simplex calling frequency' },
+    { freq:'144.200 MHz', call:'SSB call', mode:'USB (J3E)', region:'USA', desc:'2 m SSB/CW calling — USB by convention' },
+    { freq:'121.500 MHz', call:'Guard', mode:'AM', region:'USA', desc:'Aviation emergency (Guard) frequency' },
+    { freq:'162.550 MHz', call:'WX5', mode:'WBFM', region:'USA', desc:'NOAA Weather Radio channel 5' },
+    { freq:'162.400 MHz', call:'WX2', mode:'WBFM', region:'USA', desc:'NOAA Weather Radio channel 2' },
+    { freq:'145.500 MHz', call:'Call', mode:'FM (F3E)', region:'RU', desc:'2 m FM calling frequency — Russia' },
+    { freq:'144.300 MHz', call:'SSB call', mode:'USB (J3E)', region:'RU', desc:'2 m SSB — USB always on VHF+' },
+    { freq:'145.800 MHz', call:'ISS', mode:'FM (F3E)', region:'RU', desc:'ISS downlink — cosmonauts amateur contacts' },
+    { freq:'66–74 MHz', call:'FM OIRT', mode:'WBFM', region:'RU', desc:'Russian FM broadcast band (OIRT standard)' },
+    { freq:'156.800 MHz', call:'Ch 16', mode:'FM (F3E)', region:'RU', desc:'Marine Ch 16 — mandatory distress monitor' },
+  ],
+  uhf: [
+    { freq:'433.500 MHz', call:'70 cm call', mode:'FM (F3E)', region:'UK', desc:'70 cm FM simplex calling frequency' },
+    { freq:'430.950 MHz', call:'GB3 rpts', mode:'FM (F3E)', region:'UK', desc:'Typical UK 70 cm repeater output' },
+    { freq:'434.000 MHz', call:'ISM', mode:'Various', region:'UK', desc:'ISM band — LoRa, IoT, short-range devices' },
+    { freq:'1575.42 MHz', call:'GPS L1', mode:'BPSK/BOC', region:'UK', desc:'GPS/Galileo/GLONASS primary civil signal' },
+    { freq:'2.4 GHz', call:'WiFi', mode:'OFDM (802.11)', region:'UK', desc:'WiFi Ch 1-13 — ISM unlicensed' },
+    { freq:'446.000 MHz', call:'PMR Ch1', mode:'FM (F3E)', region:'UK', desc:'PMR446 licence-free personal radio Ch 1' },
+    { freq:'462.5625 MHz', call:'FRS Ch1', mode:'FM (F3E)', region:'USA', desc:'FRS/GMRS Channel 1 — licence-free family' },
+    { freq:'446.000 MHz', call:'70 cm call', mode:'FM (F3E)', region:'USA', desc:'70 cm FM national simplex calling' },
+    { freq:'1575.42 MHz', call:'GPS L1', mode:'BPSK/BOC', region:'USA', desc:'GPS L1 C/A — primary civil navigation' },
+    { freq:'462.675 MHz', call:'GMRS Ch1', mode:'FM (F3E)', region:'USA', desc:'GMRS repeater channel 1 — 50 W allowed' },
+    { freq:'2.4 GHz', call:'WiFi', mode:'OFDM (802.11)', region:'USA', desc:'WiFi — most congested ISM band' },
+    { freq:'433.500 MHz', call:'70 cm call', mode:'FM (F3E)', region:'RU', desc:'70 cm simplex calling — Russia' },
+    { freq:'446.000 MHz', call:'PMR', mode:'FM (F3E)', region:'RU', desc:'PMR446 personal radio (limited in Russia)' },
+    { freq:'1602 MHz', call:'GLONASS', mode:'FDMA/CDMA', region:'RU', desc:'GLONASS L1 — Russian nav constellation' },
+    { freq:'2.4 GHz', call:'WiFi', mode:'OFDM (802.11)', region:'RU', desc:'WiFi ISM — worldwide standard' },
+  ],
+  shf: [
+    { freq:'3.4 GHz', call:'9 cm ham', mode:'SSB/CW (USB)', region:'UK', desc:'9 cm amateur — USB always on microwaves' },
+    { freq:'3.6 GHz', call:'5G n78', mode:'OFDMA NR', region:'UK', desc:'UK 5G mid-band — EE, Three, Vodafone' },
+    { freq:'3.925 GHz', call:'C-band DL', mode:'DVB-S2 (QPSK)', region:'UK', desc:'Astra/SES satellite C-band downlink' },
+    { freq:'5.8 GHz', call:'ISM', mode:'OFDM (802.11)', region:'UK', desc:'WiFi 5 GHz / ISM — DFS channels required' },
+    { freq:'3.5 GHz', call:'CBRS', mode:'OFDMA NR/LTE', region:'USA', desc:'CBRS Citizens Broadband — shared 5G spectrum' },
+    { freq:'3.7 GHz', call:'C-band 5G', mode:'OFDMA NR', region:'USA', desc:'C-band 5G — AT&T/Verizon/T-Mobile' },
+    { freq:'4.2 GHz', call:'Radio alt.', mode:'Pulse/FMCW', region:'USA', desc:'Radar altimeter band — aviation safety' },
+    { freq:'5.8 GHz', call:'ISM', mode:'OFDM (802.11)', region:'USA', desc:'WiFi 5 GHz band — unlicensed' },
+    { freq:'3.5 GHz', call:'5G n78', mode:'OFDMA NR', region:'RU', desc:'MTS/MegaFon/Beeline 5G mid-band' },
+    { freq:'3.4 GHz', call:'9 cm ham', mode:'SSB/CW (USB)', region:'RU', desc:'9 cm amateur — threatened by 5G' },
+    { freq:'4.0 GHz', call:'C-band DL', mode:'DVB-S2', region:'RU', desc:'Yamal/Express satellite C-band downlink' },
+    { freq:'5.8 GHz', call:'ISM', mode:'OFDM (802.11)', region:'RU', desc:'WiFi 5 GHz — ISM worldwide' },
+  ],
+};
+
 let activeBand = null;
 let activeSub  = null;
 let activeSpecial = null;   /* 'glossary' | 'propagation' | null */
@@ -749,7 +892,8 @@ function selectSub(band, sub, el) {
       row('Max Distance', sub.maxDist) +
       row('Description', sub.desc) +
     '</table>' +
-    waveVis(sub.wl, band.color);
+    waveVis(sub.wl, band.color) +
+    buildWKF(band.id);
 }
 
 function row(label, val) {
@@ -776,6 +920,31 @@ function waveVis(wlText, color) {
     '</svg>' +
     '<span class="wave-label">λ ≈ ' + wlText + '</span>' +
   '</div>';
+}
+
+/* well-known frequencies renderer */
+function buildWKF(bandId) {
+  const list = WKF[bandId];
+  if (!list || !list.length) return '';
+  const regions = [
+    { key:'UK', cls:'wkf-uk', label:'United Kingdom' },
+    { key:'USA', cls:'wkf-usa', label:'United States' },
+    { key:'RU', cls:'wkf-ru', label:'Russia' },
+  ];
+  let html = '<div class="wkf-section"><h3>Well-Known Frequencies</h3>';
+  regions.forEach(function(r) {
+    const items = list.filter(function(e) { return e.region === r.key; });
+    if (!items.length) return;
+    html += '<div class="wkf-region"><h4 class="' + r.cls + '">' + r.label + '</h4>' +
+      '<table class="wkf-table"><tr><th>Freq</th><th>Call / ID</th><th>Mode</th><th>Description</th></tr>';
+    items.forEach(function(e) {
+      html += '<tr><td class="wkf-freq">' + e.freq + '</td><td>' + e.call +
+        '</td><td class="wkf-mod">' + e.mode + '</td><td>' + e.desc + '</td></tr>';
+    });
+    html += '</table></div>';
+  });
+  html += '</div>';
+  return html;
 }
 
 /* ══════════════════════════════════════════════════════════════
