@@ -12,7 +12,7 @@
 <style>
 /* ── reset & base ──────────────────────────────────────────── */
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;overflow:hidden;font-family:'JetBrains Mono',monospace;background:#0a0a0f;color:#c8ccd0;font-size:11px;line-height:1.45;-webkit-font-smoothing:antialiased}
+html,body{height:100%;overflow:hidden;font-family:'JetBrains Mono',monospace;background:#0a0a0f;color:#c8ccd0;font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased}
 
 /* ── scanline overlay ──────────────────────────────────────── */
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
@@ -22,10 +22,10 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .app{display:flex;flex-direction:column;height:100vh;width:100vw;overflow:hidden}
 
 /* ── top bar ───────────────────────────────────────────────── */
-.top-bar{flex:0 0 30px;display:flex;align-items:center;padding:0 12px;
+.top-bar{flex:0 0 32px;display:flex;align-items:center;padding:0 14px;
   background:linear-gradient(90deg,#0c0e16,#10131c);border-bottom:1px solid #1e2536;gap:10px;z-index:10}
-.top-bar .title{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#00ff88;white-space:nowrap}
-.top-bar .range{font-size:9px;color:#4a5568;letter-spacing:1px}
+.top-bar .title{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#00ff88;white-space:nowrap}
+.top-bar .range{font-size:10px;color:#4a5568;letter-spacing:1px}
 .top-bar .dot{width:6px;height:6px;border-radius:50%;background:#00ff88;box-shadow:0 0 6px #00ff88;animation:blink 2s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
@@ -33,16 +33,16 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .main{flex:1;display:flex;overflow:hidden;min-height:0}
 
 /* ── left: band panel ──────────────────────────────────────── */
-.band-panel{flex:0 0 88px;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:8px 6px;
+.band-panel{flex:0 0 100px;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:6px;
   background:linear-gradient(180deg,#0c0e16,#0e1018);border-right:1px solid #1a1f2e;z-index:5}
 
 /* ── SC‑style band button ──────────────────────────────────── */
 .band-btn{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:7px 4px;cursor:pointer;user-select:none;transition:all .25s ease;
+  padding:6px 4px;cursor:pointer;user-select:none;transition:all .25s ease;
   clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px),0 6px);
   background:linear-gradient(180deg,#151a28 0%,#0f1220 50%,#151a28 100%)}
-.band-btn .label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:color .25s}
-.band-btn .freq{font-size:7px;color:#3e4a5e;letter-spacing:.5px;margin-top:1px;transition:color .25s}
+.band-btn .label{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:color .25s}
+.band-btn .freq{font-size:8px;color:#3e4a5e;letter-spacing:.5px;margin-top:1px;transition:color .25s}
 .band-btn:hover{filter:brightness(1.3)}
 .band-btn:hover .label{color:#c0d0e0}
 .band-btn.active{animation:pulse-glow 2.5s ease-in-out infinite}
@@ -57,6 +57,14 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .band-btn[data-band="uhf"]  .label{color:#305a8a}.band-btn[data-band="uhf"].active  .label{color:#33aaff}
 .band-btn[data-band="shf"]  .label{color:#60408a}.band-btn[data-band="shf"].active  .label{color:#aa66ff}
 
+/* special tab buttons */
+.band-btn[data-band="glossary"] .label{color:#5a6a7a}
+.band-btn[data-band="glossary"].active .label{color:#88ccff}
+.band-btn[data-band="glossary"]::after{background:#88ccff}
+.band-btn[data-band="propagation"] .label{color:#5a6a7a}
+.band-btn[data-band="propagation"].active .label{color:#ffaa44}
+.band-btn[data-band="propagation"]::after{background:#ffaa44}
+
 @keyframes pulse-glow{0%,100%{filter:drop-shadow(0 0 4px rgba(255,255,255,.15)) brightness(1.1)}50%{filter:drop-shadow(0 0 10px rgba(255,255,255,.25)) brightness(1.25)}}
 
 /* small coloured bar under button */
@@ -70,42 +78,45 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .band-btn[data-band="uhf"]::after{background:#33aaff}
 .band-btn[data-band="shf"]::after{background:#aa66ff}
 
+/* separator line between bands and special tabs */
+.band-sep{height:1px;background:linear-gradient(90deg,transparent,#1e2536,transparent);margin:2px 8px;flex-shrink:0}
+
 /* ── middle: sub‑band panel ────────────────────────────────── */
 .sub-panel{flex:0 0 0;overflow:hidden;transition:flex-basis .35s cubic-bezier(.4,0,.2,1),opacity .3s;opacity:0;
   display:flex;flex-direction:column;background:#0b0d15;border-right:1px solid #1a1f2e}
-.sub-panel.open{flex-basis:195px;opacity:1}
+.sub-panel.open{flex-basis:210px;opacity:1}
 .sub-panel-inner{display:flex;flex-direction:column;gap:3px;padding:6px;overflow-y:auto;overflow-x:hidden;flex:1;min-height:0}
 .sub-panel-inner::-webkit-scrollbar{width:3px}
 .sub-panel-inner::-webkit-scrollbar-thumb{background:#1e2536;border-radius:2px}
-.sub-panel-header{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#3e4a5e;padding:4px 8px 2px;white-space:nowrap;flex-shrink:0}
+.sub-panel-header{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#3e4a5e;padding:4px 8px 2px;white-space:nowrap;flex-shrink:0}
 
 /* sub‑band button */
-.sub-btn{position:relative;padding:5px 8px;cursor:pointer;user-select:none;font-size:9.5px;font-weight:500;
+.sub-btn{position:relative;padding:5px 8px;cursor:pointer;user-select:none;font-size:11px;font-weight:500;
   color:#6a7a90;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:all .2s ease;
   clip-path:polygon(4px 0,calc(100% - 4px) 0,100% 4px,100% calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,0 calc(100% - 4px),0 4px);
   background:linear-gradient(180deg,#13162200,#111420)}
 .sub-btn:hover{background:linear-gradient(180deg,#1a1e30,#151828);color:#a0b0c8}
 .sub-btn.active{color:#fff;background:linear-gradient(180deg,#181e32,#141a2c)}
-.sub-btn .sub-freq{display:block;font-size:7.5px;color:#3a4658;margin-top:1px;font-weight:400;transition:color .2s}
+.sub-btn .sub-freq{display:block;font-size:9px;color:#3a4658;margin-top:1px;font-weight:400;transition:color .2s}
 .sub-btn.active .sub-freq{color:#5a6a80}
 
 /* ── right: detail panel ───────────────────────────────────── */
 .detail-panel{flex:1;overflow:hidden;opacity:0;transition:opacity .3s ease .1s;display:flex;flex-direction:column;
   background:linear-gradient(135deg,#0a0c14,#0d0f18);min-width:0}
 .detail-panel.open{opacity:1}
-.detail-inner{padding:10px 14px;overflow-y:auto;flex:1;min-height:0}
+.detail-inner{padding:12px 16px;overflow-y:auto;flex:1;min-height:0}
 .detail-inner::-webkit-scrollbar{width:3px}
 .detail-inner::-webkit-scrollbar-thumb{background:#1e2536;border-radius:2px}
 
 /* detail: header */
-.detail-title{font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:2px}
-.detail-subtitle{font-size:8px;color:#3e4a5e;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.detail-title{font-size:16px;font-weight:700;letter-spacing:1px;margin-bottom:2px}
+.detail-subtitle{font-size:10px;color:#3e4a5e;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
 
 /* detail: data table */
 .detail-table{width:100%;border-collapse:collapse;table-layout:fixed}
-.detail-table th{text-align:left;font-size:8px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#4a5a6e;
-  padding:6px 8px;border-bottom:1px solid #1a1f2e;width:95px;vertical-align:top;white-space:nowrap}
-.detail-table td{font-size:10px;color:#b0bcc8;padding:6px 8px;border-bottom:1px solid #12151e;vertical-align:top;word-wrap:break-word}
+.detail-table th{text-align:left;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#4a5a6e;
+  padding:6px 10px;border-bottom:1px solid #1a1f2e;width:105px;vertical-align:top;white-space:nowrap}
+.detail-table td{font-size:12px;color:#b0bcc8;padding:6px 10px;border-bottom:1px solid #12151e;vertical-align:top;word-wrap:break-word}
 .detail-table tr:last-child th,.detail-table tr:last-child td{border-bottom:none}
 
 /* coloured accent bar in detail */
@@ -114,14 +125,35 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 /* wavelength visual */
 .wave-vis{display:flex;align-items:center;gap:6px;margin-top:8px;padding:6px 0}
 .wave-vis svg{flex-shrink:0}
-.wave-vis .wave-label{font-size:8px;color:#3e4a5e;letter-spacing:.5px}
+.wave-vis .wave-label{font-size:10px;color:#3e4a5e;letter-spacing:.5px}
+
+/* ── glossary terms in detail ──────────────────────────────── */
+.glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.glossary-item{padding:5px 10px;border-bottom:1px solid #12151e}
+.glossary-item:nth-child(odd){border-right:1px solid #12151e}
+.glossary-term{font-size:11px;font-weight:600;color:#88ccff;margin-bottom:1px}
+.glossary-def{font-size:11px;color:#8a96a4;line-height:1.4}
+.glossary-cat{grid-column:1/-1;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#3e4a5e;padding:8px 10px 4px;border-bottom:1px solid #1a1f2e}
+
+/* ── propagation panel ─────────────────────────────────────── */
+.prop-section{margin-bottom:14px}
+.prop-section h3{font-size:12px;font-weight:600;color:#ffaa44;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase}
+.prop-section p{font-size:11px;color:#8a96a4;line-height:1.5;margin-bottom:4px}
+.atmo-diagram{width:100%;max-width:700px}
+.atmo-diagram text{font-family:'JetBrains Mono',monospace}
+.world-map-wrap{position:relative;width:100%;max-width:700px;margin-top:6px}
+.world-map-wrap svg{width:100%;height:auto}
+.world-map-wrap text{font-family:'JetBrains Mono',monospace}
+.prop-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.prop-legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:#6a7a90}
+.prop-legend-swatch{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 
 /* ── placeholder / empty state ─────────────────────────────── */
-.empty-state{flex:1;display:flex;align-items:center;justify-content:center;color:#1e2536;font-size:10px;letter-spacing:2px;text-transform:uppercase;user-select:none}
+.empty-state{flex:1;display:flex;align-items:center;justify-content:center;color:#1e2536;font-size:12px;letter-spacing:2px;text-transform:uppercase;user-select:none}
 
 /* ── bottom bar ────────────────────────────────────────────── */
-.bottom-bar{flex:0 0 22px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;
-  background:#0c0e16;border-top:1px solid #1a1f2e;font-size:8px;color:#2a3344;letter-spacing:1px}
+.bottom-bar{flex:0 0 24px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;
+  background:#0c0e16;border-top:1px solid #1a1f2e;font-size:10px;color:#2a3344;letter-spacing:1px}
 
 /* ── click ripple ──────────────────────────────────────────── */
 @keyframes ripple{0%{transform:scale(0);opacity:.5}100%{transform:scale(2.5);opacity:0}}
@@ -129,13 +161,15 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
 /* ── responsive: tablet ────────────────────────────────────── */
 @media(max-width:900px){
-  .band-panel{flex:0 0 72px;padding:6px 4px;gap:4px}
-  .band-btn .label{font-size:10px}
-  .band-btn .freq{font-size:6.5px}
-  .sub-panel.open{flex-basis:165px}
-  .sub-btn{font-size:9px;padding:4px 6px}
-  .detail-table th{width:80px;font-size:7.5px}
-  .detail-table td{font-size:9px}
+  .band-panel{flex:0 0 82px;padding:5px 4px;gap:3px}
+  .band-btn .label{font-size:12px}
+  .band-btn .freq{font-size:7px}
+  .sub-panel.open{flex-basis:175px}
+  .sub-btn{font-size:10px;padding:4px 6px}
+  .detail-table th{width:90px;font-size:9px}
+  .detail-table td{font-size:11px}
+  .glossary-grid{grid-template-columns:1fr}
+  .glossary-item:nth-child(odd){border-right:none}
 }
 
 /* ── responsive: mobile ────────────────────────────────────── */
@@ -143,16 +177,19 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
   .app{overflow-y:auto}
   .main{flex-direction:column;overflow-y:auto;overflow-x:hidden}
   .band-panel{flex:0 0 auto;flex-direction:row;justify-content:flex-start;overflow-x:auto;padding:4px;gap:4px;border-right:none;border-bottom:1px solid #1a1f2e}
+  .band-sep{width:1px;height:auto;margin:2px 0;min-height:20px}
   .band-btn{min-width:56px;padding:5px 6px}
-  .band-btn .label{font-size:10px}
+  .band-btn .label{font-size:11px}
   .band-btn .freq{display:none}
   .sub-panel{flex:0 0 0;border-right:none;border-bottom:1px solid #1a1f2e;transition:flex-basis .3s,opacity .25s}
   .sub-panel.open{flex-basis:auto}
   .sub-panel-inner{flex-direction:row;flex-wrap:wrap;overflow-y:visible;padding:4px}
-  .sub-btn{flex:0 0 auto;font-size:9px;padding:4px 8px}
+  .sub-btn{flex:0 0 auto;font-size:10px;padding:4px 8px}
   .detail-panel{flex:1 1 auto;overflow-y:auto}
   .detail-panel.open{min-height:200px}
   .detail-inner{padding:8px}
+  .glossary-grid{grid-template-columns:1fr}
+  .glossary-item:nth-child(odd){border-right:none}
   body{overflow:auto}
   html{overflow:auto}
 }
@@ -421,11 +458,155 @@ const BANDS = [
   ]},
 ];
 
+/* ══════════════════════════════════════════════════════════════
+   GLOSSARY — every abbreviation / term explained
+   ══════════════════════════════════════════════════════════════ */
+const GLOSSARY = [
+  { cat:'Frequency Band Names' },
+  { term:'VLF', def:'Very Low Frequency — 3 to 30 kHz' },
+  { term:'LF',  def:'Low Frequency — 30 to 300 kHz' },
+  { term:'MF',  def:'Medium Frequency — 300 kHz to 3 MHz' },
+  { term:'HF',  def:'High Frequency — 3 to 30 MHz' },
+  { term:'VHF', def:'Very High Frequency — 30 to 300 MHz' },
+  { term:'UHF', def:'Ultra High Frequency — 300 MHz to 3 GHz' },
+  { term:'SHF', def:'Super High Frequency — 3 to 30 GHz' },
+
+  { cat:'Modulation Types' },
+  { term:'AM',   def:'Amplitude Modulation — signal encoded as changes in wave amplitude' },
+  { term:'FM',   def:'Frequency Modulation — signal encoded as changes in wave frequency' },
+  { term:'SSB',  def:'Single Sideband — AM variant that transmits only one sideband, saving bandwidth and power' },
+  { term:'DSB-FC', def:'Double Sideband Full Carrier — standard AM broadcasting with both sidebands and carrier' },
+  { term:'CW',   def:'Continuous Wave — unmodulated carrier keyed on/off for Morse code' },
+  { term:'OOK',  def:'On-Off Keying — simplest digital modulation: carrier present = 1, absent = 0' },
+  { term:'FSK',  def:'Frequency Shift Keying — digital data encoded by shifting between two frequencies' },
+  { term:'MSK',  def:'Minimum Shift Keying — FSK variant with minimum frequency separation for given data rate' },
+  { term:'BPSK', def:'Binary Phase Shift Keying — two phase states (0° and 180°) representing 1 and 0' },
+  { term:'QPSK', def:'Quadrature Phase Shift Keying — four phase states encoding 2 bits per symbol' },
+  { term:'8PSK', def:'8-Phase Shift Keying — eight phase states encoding 3 bits per symbol' },
+  { term:'QAM',  def:'Quadrature Amplitude Modulation — combines amplitude and phase changes; QAM-256/1024 = bits per symbol' },
+  { term:'OFDM', def:'Orthogonal Frequency Division Multiplexing — data split across many closely-spaced sub-carriers' },
+  { term:'OFDMA',def:'OFDM Access — OFDM with multiple users sharing sub-carriers (used in LTE/5G)' },
+  { term:'SC-FDMA', def:'Single Carrier FDMA — uplink modulation in LTE; lower peak-to-average power ratio' },
+  { term:'COFDM',def:'Coded OFDM — OFDM with forward error correction built in (DAB, DVB-T)' },
+  { term:'DSSS', def:'Direct Sequence Spread Spectrum — signal spread across wide bandwidth using pseudo-random code' },
+  { term:'FHSS', def:'Frequency Hopping Spread Spectrum — rapidly switches carrier among many channels (Bluetooth)' },
+  { term:'GFSK', def:'Gaussian FSK — FSK with Gaussian filter for smoother transitions (Bluetooth)' },
+  { term:'GMSK', def:'Gaussian Minimum Shift Keying — MSK with Gaussian filter; used in GSM' },
+  { term:'8DPSK',def:'8-state Differential Phase Shift Keying — encodes data in phase changes between symbols' },
+  { term:'BOC',  def:'Binary Offset Carrier — modulation for newer GNSS signals (GPS L1C, Galileo)' },
+  { term:'8VSB', def:'8-level Vestigial Sideband — modulation used by ATSC digital TV in North America' },
+  { term:'WBFM', def:'Wideband FM — FM with ±75 kHz deviation, used for FM broadcast and weather radio' },
+  { term:'DRM',  def:'Digital Radio Mondiale — digital broadcast standard for shortwave/MW/LW bands' },
+  { term:'NBDP', def:'Narrow Band Direct Printing — automated text communication for maritime (radiotelex)' },
+
+  { cat:'Protocols & Standards' },
+  { term:'LTE',   def:'Long Term Evolution — 4G cellular standard; downlink up to ~300 Mbps' },
+  { term:'5G NR', def:'5th Generation New Radio — latest cellular standard; sub-6 GHz and mmWave' },
+  { term:'UMTS',  def:'Universal Mobile Telecommunications System — 3G standard using W-CDMA' },
+  { term:'W-CDMA',def:'Wideband Code Division Multiple Access — 3G air interface; 5 MHz channels' },
+  { term:'CDMA',  def:'Code Division Multiple Access — multiple users share frequency using unique codes' },
+  { term:'GSM',   def:'Global System for Mobile Communications — 2G digital cellular standard' },
+  { term:'HSPA+', def:'High Speed Packet Access+ — enhanced 3G; up to ~42 Mbps downlink' },
+  { term:'MIMO',  def:'Multiple Input Multiple Output — multiple antennas at TX and RX for throughput/reliability' },
+  { term:'FDD',   def:'Frequency Division Duplex — separate frequencies for uplink and downlink' },
+  { term:'ATSC',  def:'Advanced Television Systems Committee — US/Canada/Korea digital TV standard' },
+  { term:'DVB-T/T2', def:'Digital Video Broadcasting Terrestrial — European digital TV standard; T2 is 2nd generation' },
+  { term:'DVB-S/S2', def:'Digital Video Broadcasting Satellite — satellite TV standard; S2 is 2nd generation' },
+  { term:'DAB/DAB+', def:'Digital Audio Broadcasting — digital radio standard using OFDM; DAB+ uses HE-AAC v2 codec' },
+  { term:'RDS',   def:'Radio Data System — digital data piggybacked on FM broadcasts (station name, traffic info)' },
+  { term:'IBOC',  def:'In-Band On-Channel — "HD Radio"; digital sidebands added to analogue FM/AM signal' },
+  { term:'HE-AAC v2', def:'High Efficiency Advanced Audio Coding v2 — audio codec for DAB+; near-CD quality at 48-64 kbps' },
+  { term:'DSC',   def:'Digital Selective Calling — automated digital system for maritime distress alerts and calling' },
+  { term:'AIS',   def:'Automatic Identification System — ships broadcast position, speed, heading on VHF' },
+  { term:'GMDSS', def:'Global Maritime Distress and Safety System — international maritime emergency framework' },
+  { term:'SAME',  def:'Specific Area Message Encoding — digital coding for targeted weather alerts (NOAA)' },
+
+  { cat:'Navigation & Satellite' },
+  { term:'GPS',   def:'Global Positioning System — US satellite navigation constellation (24+ MEO satellites)' },
+  { term:'GNSS',  def:'Global Navigation Satellite System — umbrella term for GPS, GLONASS, Galileo, BeiDou' },
+  { term:'GLONASS', def:'GLObal NAvigation Satellite System — Russian GNSS constellation' },
+  { term:'Galileo', def:'European Union GNSS constellation' },
+  { term:'BeiDou', def:'Chinese GNSS constellation (BDS)' },
+  { term:'SBAS',  def:'Satellite Based Augmentation System — geostationary corrections improving GNSS to ~1 m (WAAS, EGNOS)' },
+  { term:'RTK',   def:'Real Time Kinematic — carrier-phase GNSS positioning; centimetre accuracy using base station' },
+  { term:'MEO',   def:'Medium Earth Orbit — altitude ~2 000–35 786 km; used by GNSS satellites (~20 200 km)' },
+  { term:'GEO',   def:'Geostationary Earth Orbit — 35 786 km altitude; satellite appears stationary over equator' },
+  { term:'VOR',   def:'VHF Omnidirectional Range — ground-based aviation navaid providing bearing information' },
+  { term:'ILS',   def:'Instrument Landing System — precision approach system using localizer and glideslope beams' },
+  { term:'NDB',   def:'Non-Directional Beacon — simple radio beacon; aircraft ADF determines bearing to it' },
+  { term:'ADF',   def:'Automatic Direction Finder — aircraft receiver that determines bearing to an NDB' },
+  { term:'LORAN-C', def:'Long Range Navigation — hyperbolic navigation using precisely timed LF pulses' },
+  { term:'eLoran', def:'Enhanced LORAN — modernised LORAN-C as GPS backup with improved accuracy' },
+
+  { cat:'Amateur Radio Terms' },
+  { term:'DX',    def:'Long distance communication or a distant station' },
+  { term:'DXpedition', def:'Expedition to a rare/remote location to provide contacts to amateur operators' },
+  { term:'QRM',   def:'Man-made interference (from other stations)' },
+  { term:'FT8',   def:'Franke-Taylor 8-FSK — weak-signal digital mode; 15-second transmit periods; -20 dB sensitivity' },
+  { term:'WSPR',  def:'Weak Signal Propagation Reporter — beacon mode for studying propagation; sub-noise-floor detection' },
+  { term:'JS8Call', def:'Keyboard-to-keyboard messaging mode built on FT8 modulation' },
+  { term:'RTTY',  def:'Radio Teletype — digital text mode using FSK; one of the oldest digital modes' },
+  { term:'SSTV',  def:'Slow Scan Television — still images transmitted over HF radio in ~1-2 minutes' },
+  { term:'APRS',  def:'Automatic Packet Reporting System — real-time position/telemetry on 144.39 MHz (USA)' },
+  { term:'ATV',   def:'Amateur Television — full-motion video transmitted by amateur operators' },
+  { term:'EME',   def:'Earth-Moon-Earth ("moonbounce") — signals reflected off the Moon; ~2.4 s round trip' },
+  { term:'WARC band', def:'Bands allocated at 1979 World Administrative Radio Conference (12 m, 17 m, 30 m); no contests' },
+  { term:'NVIS',  def:'Near Vertical Incidence Skywave — signals sent nearly straight up, reflected by ionosphere for ~0-600 km coverage' },
+  { term:'D-STAR', def:'Digital Smart Technologies for Amateur Radio — digital voice/data protocol by ICOM' },
+  { term:'DMR',   def:'Digital Mobile Radio — TDMA-based digital voice standard (Motorola); widely used by amateurs' },
+  { term:'C4FM',  def:'Continuous 4-level FM — Yaesu System Fusion digital voice modulation' },
+  { term:'CB',    def:'Citizens Band — licence-free personal radio service around 27 MHz' },
+
+  { cat:'Propagation Terms' },
+  { term:'Ground wave', def:'Signal that follows the Earth\'s surface; dominant at LF/MF; range depends on power and terrain' },
+  { term:'Sky wave',    def:'Signal refracted by ionosphere back to Earth; enables long-distance HF communication' },
+  { term:'Line of sight (LoS)', def:'Direct path between transmitter and receiver; dominant above ~30 MHz (VHF+)' },
+  { term:'Skip zone',   def:'Area between ground-wave limit and first sky-wave return where no signal is received' },
+  { term:'F-layer / F2-layer', def:'Upper ionosphere layer (150-500 km); primary layer for long-distance HF refraction' },
+  { term:'E-layer',     def:'Ionosphere layer at ~90-150 km; sporadic E can reflect VHF signals' },
+  { term:'D-layer',     def:'Lowest ionosphere layer (~60-90 km); absorbs HF during daytime; disappears at night' },
+  { term:'Sporadic E',  def:'Unpredictable patches of intense ionisation in E-layer; can propagate VHF (50-150 MHz)' },
+  { term:'Tropo ducting',def:'Temperature inversion traps VHF/UHF signals in duct along Earth\'s surface; 100s of km range' },
+  { term:'Knife-edge diffraction', def:'Signal bends around sharp obstacles (hills, buildings); extends range beyond LoS' },
+  { term:'Rain fade',   def:'Signal attenuation due to rain absorption; significant above ~10 GHz, negligible below ~4 GHz' },
+  { term:'Multipath',   def:'Signal arrives via multiple paths (reflections) causing constructive/destructive interference' },
+  { term:'NM',    def:'Nautical Mile — 1 852 metres; standard distance unit in aviation and maritime' },
+  { term:'FL350', def:'Flight Level 350 — altitude of 35 000 feet (standard pressure) ≈ 10 668 m' },
+  { term:'Solar cycle',  def:'~11-year cycle of solar activity; high activity improves HF propagation on higher bands' },
+  { term:'SFI / Solar Flux Index', def:'Measure of solar radio emission at 2800 MHz; correlates with ionospheric ionisation' },
+
+  { cat:'Technologies & Other' },
+  { term:'ISM band', def:'Industrial, Scientific, Medical — unlicensed frequency bands (e.g. 2.4 GHz, 5.8 GHz)' },
+  { term:'Beamforming', def:'Antenna technique focusing signal energy toward specific users using phase arrays' },
+  { term:'Massive MIMO', def:'MIMO with 64+ antenna elements (e.g. 64T64R) — key 5G technology for capacity' },
+  { term:'SAN',    def:'Storage Area Network — high-speed network providing block-level data storage access' },
+  { term:'BW',     def:'Bandwidth — width of frequency range used by a signal or channel' },
+  { term:'FirstNet', def:'US nationwide public safety broadband network on LTE Band 14 (758-768 / 788-798 MHz)' },
+  { term:'Repack / Digital dividend', def:'Reclaiming TV broadcast spectrum and reallocating it to mobile broadband' },
+  { term:'C/A code', def:'Coarse/Acquisition code — civilian GPS pseudo-random code; ~3-5 m accuracy' },
+  { term:'P(Y) code', def:'Precision encrypted GPS code — military; centimetre-level accuracy' },
+  { term:'aptX',  def:'Qualcomm audio codec for Bluetooth; near-CD quality at lower latency than SBC' },
+  { term:'BLE',   def:'Bluetooth Low Energy — power-efficient Bluetooth variant for IoT, beacons, sensors' },
+  { term:'Zigbee', def:'IEEE 802.15.4-based wireless protocol for low-power IoT mesh networks' },
+  { term:'Thread', def:'IPv6-based mesh networking protocol for IoT devices; runs on 802.15.4 radio' },
+  { term:'NEXRAD', def:'Next-Generation Radar (WSR-88D) — US national network of S-band Doppler weather radars' },
+  { term:'TDWR',  def:'Terminal Doppler Weather Radar — airport wind-shear detection radar' },
+  { term:'ATC',   def:'Air Traffic Control' },
+  { term:'ITU',   def:'International Telecommunication Union — UN agency allocating global radio spectrum' },
+  { term:'NWS',   def:'National Weather Service — US agency providing weather forecasts and warnings' },
+  { term:'NOAA',  def:'National Oceanic and Atmospheric Administration — US agency; operates weather radio' },
+  { term:'AWS',   def:'Advanced Wireless Services — additional US cellular spectrum bands (1.7/2.1 GHz)' },
+  { term:'λ (lambda)', def:'Wavelength — distance between consecutive wave peaks; λ = c / f (speed of light / frequency)' },
+  { term:'bps',   def:'Bits per second — data transfer rate unit' },
+  { term:'kHz / MHz / GHz', def:'Kilohertz (10³ Hz) / Megahertz (10⁶ Hz) / Gigahertz (10⁹ Hz) — frequency units' },
+];
+
 /* ═══════════════════════════════════════════════════════════
    APP STATE & HELPERS
    ═══════════════════════════════════════════════════════════ */
 let activeBand = null;
 let activeSub  = null;
+let activeSpecial = null;   /* 'glossary' | 'propagation' | null */
 
 const $ = s => document.querySelector(s);
 
@@ -440,20 +621,40 @@ BANDS.forEach(b => {
   el.className = 'band-btn';
   el.dataset.band = b.id;
   el.innerHTML = '<span class="label">' + b.name + '</span><span class="freq">' + b.range + '</span>';
-  el.addEventListener('click', () => selectBand(b));
+  el.addEventListener('click', () => { activeSpecial = null; selectBand(b); });
   bandPanel.appendChild(el);
 });
 
+/* separator */
+const sep = document.createElement('div');
+sep.className = 'band-sep';
+bandPanel.appendChild(sep);
+
+/* glossary button */
+const glossBtn = document.createElement('div');
+glossBtn.className = 'band-btn';
+glossBtn.dataset.band = 'glossary';
+glossBtn.innerHTML = '<span class="label">ABC</span><span class="freq">Glossary</span>';
+glossBtn.addEventListener('click', () => openGlossary());
+bandPanel.appendChild(glossBtn);
+
+/* propagation button */
+const propBtn = document.createElement('div');
+propBtn.className = 'band-btn';
+propBtn.dataset.band = 'propagation';
+propBtn.innerHTML = '<span class="label">PROP</span><span class="freq">Propagation</span>';
+propBtn.addEventListener('click', () => openPropagation());
+bandPanel.appendChild(propBtn);
+
 /* ── select a band ───────────────────────────────────────── */
 function selectBand(band) {
-  if (activeBand === band.id) return;       // already open
+  if (activeBand === band.id && !activeSpecial) return;
   activeBand = band.id;
   activeSub  = null;
+  activeSpecial = null;
 
-  /* highlight button */
   document.querySelectorAll('.band-btn').forEach(el => el.classList.toggle('active', el.dataset.band === band.id));
 
-  /* populate sub-panel */
   const subInner = $('#subInner');
   subInner.innerHTML = '';
   $('#subHeader').textContent = band.full;
@@ -466,7 +667,6 @@ function selectBand(band) {
   });
   $('#subPanel').classList.add('open');
 
-  /* hide detail panel until sub selected */
   $('#detailInner').style.display = 'none';
   $('#emptyState').style.display = 'flex';
   $('#emptyState').textContent = '← Select a sub‑band';
@@ -477,11 +677,9 @@ function selectBand(band) {
 function selectSub(band, sub, el) {
   activeSub = sub.name;
 
-  /* highlight */
   document.querySelectorAll('.sub-btn').forEach(e => e.classList.remove('active'));
   el.classList.add('active');
 
-  /* build detail */
   const d = $('#detailInner');
   d.style.display = 'block';
   $('#emptyState').style.display = 'none';
@@ -510,14 +708,10 @@ function row(label, val) {
 function waveVis(wlText, color) {
   const num = parseFloat(wlText);
   if (isNaN(num)) return '';
-  let unit = 'km';
-  let val = num;
-  if (wlText.includes('cm')) { unit = 'cm'; }
-  else if (wlText.includes(' m') && !wlText.includes('km')) { unit = 'm'; }
-
-  /* draw a simple sine wave, cycles proportional to log of frequency (inverse of wl) */
-  const cycles = Math.max(1, Math.min(12, Math.round(8 - Math.log10(val))));
-  const w = 180, h = 28;
+  if (wlText.includes('cm')) { /* cm */ }
+  else if (wlText.includes(' m') && !wlText.includes('km')) { /* m */ }
+  const cycles = Math.max(1, Math.min(12, Math.round(8 - Math.log10(num))));
+  const w = 200, h = 30;
   let path = 'M0,' + (h/2);
   for (let i = 0; i <= cycles * 20; i++) {
     const x = (i / (cycles * 20)) * w;
@@ -530,6 +724,284 @@ function waveVis(wlText, color) {
     '</svg>' +
     '<span class="wave-label">λ ≈ ' + wlText + '</span>' +
   '</div>';
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GLOSSARY PANEL
+   ══════════════════════════════════════════════════════════════ */
+function openGlossary() {
+  activeSpecial = 'glossary';
+  activeBand = 'glossary';
+  activeSub = null;
+  document.querySelectorAll('.band-btn').forEach(el => el.classList.toggle('active', el.dataset.band === 'glossary'));
+
+  /* hide sub-panel */
+  $('#subPanel').classList.remove('open');
+
+  /* show detail with glossary */
+  const d = $('#detailInner');
+  d.style.display = 'block';
+  $('#emptyState').style.display = 'none';
+  $('#detailPanel').classList.add('open');
+
+  let html = '<div class="accent-bar" style="background:#88ccff"></div>' +
+    '<div class="detail-title" style="color:#88ccff">Glossary — Terms & Abbreviations</div>' +
+    '<div class="detail-subtitle">Every term and abbreviation used on this page, explained</div>' +
+    '<div class="glossary-grid">';
+
+  GLOSSARY.forEach(item => {
+    if (item.cat) {
+      html += '<div class="glossary-cat">' + item.cat + '</div>';
+    } else {
+      html += '<div class="glossary-item"><div class="glossary-term">' + item.term + '</div><div class="glossary-def">' + item.def + '</div></div>';
+    }
+  });
+  html += '</div>';
+  d.innerHTML = html;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPAGATION PANEL — atmosphere layers + day/night world map
+   ══════════════════════════════════════════════════════════════ */
+function openPropagation() {
+  activeSpecial = 'propagation';
+  activeBand = 'propagation';
+  activeSub = null;
+  document.querySelectorAll('.band-btn').forEach(el => el.classList.toggle('active', el.dataset.band === 'propagation'));
+
+  $('#subPanel').classList.remove('open');
+
+  const d = $('#detailInner');
+  d.style.display = 'block';
+  $('#emptyState').style.display = 'none';
+  $('#detailPanel').classList.add('open');
+
+  d.innerHTML =
+    '<div class="accent-bar" style="background:#ffaa44"></div>' +
+    '<div class="detail-title" style="color:#ffaa44">Signal Propagation</div>' +
+    '<div class="detail-subtitle">Atmospheric layers, propagation modes & real-time day/night map</div>' +
+    buildAtmoDiagram() +
+    buildPropModes() +
+    buildWorldMap() +
+    buildPropBandTable();
+}
+
+/* ── Atmosphere layers diagram (SVG) ──────────────────────── */
+function buildAtmoDiagram() {
+  const w = 680, h = 220;
+  /* layers: name, bottom altitude (km), top (km), colour, opacity */
+  const layers = [
+    { name:'Troposphere', bot:0, top:12, color:'#2a5a4a', note:'Weather, tropo ducting (VHF/UHF)' },
+    { name:'Stratosphere', bot:12, top:50, color:'#2a4a6a', note:'Stable; no significant radio effect' },
+    { name:'D-Layer', bot:60, top:90, color:'#6a3030', note:'Absorbs HF by day; vanishes at night' },
+    { name:'E-Layer', bot:90, top:150, color:'#6a6a30', note:'Sporadic E reflects VHF; MF reflection' },
+    { name:'F1-Layer', bot:150, top:250, color:'#306a30', note:'Merges with F2 at night' },
+    { name:'F2-Layer', bot:250, top:500, color:'#30306a', note:'Primary HF refraction layer; DX engine' },
+  ];
+  const scale = y => h - 8 - (y / 520) * (h - 30);
+
+  let svg = '<div class="prop-section"><h3>Atmospheric Layers & Ionosphere</h3>' +
+    '<svg class="atmo-diagram" viewBox="0 0 ' + w + ' ' + h + '">';
+
+  /* background */
+  svg += '<rect x="0" y="0" width="' + w + '" height="' + h + '" fill="#0a0c14" rx="4"/>';
+
+  /* altitude axis */
+  [0, 50, 100, 200, 300, 400, 500].forEach(alt => {
+    const y = scale(alt);
+    svg += '<line x1="50" y1="' + y + '" x2="' + (w-10) + '" y2="' + y + '" stroke="#1a1f2e" stroke-width="0.5" stroke-dasharray="3,3"/>';
+    svg += '<text x="46" y="' + (y+3) + '" fill="#3e4a5e" font-size="8" text-anchor="end">' + alt + ' km</text>';
+  });
+
+  /* draw layers */
+  layers.forEach(l => {
+    const y1 = scale(l.top);
+    const y2 = scale(l.bot);
+    svg += '<rect x="60" y="' + y1 + '" width="' + (w-80) + '" height="' + (y2-y1) + '" fill="' + l.color + '" opacity="0.35" rx="2"/>';
+    const mid = (y1 + y2) / 2;
+    svg += '<text x="70" y="' + (mid+3) + '" fill="#b0bcc8" font-size="10" font-weight="600">' + l.name + '</text>';
+    svg += '<text x="' + (w-20) + '" y="' + (mid+3) + '" fill="#6a7a90" font-size="8" text-anchor="end">' + l.note + '</text>';
+  });
+
+  /* Earth surface */
+  const ground = scale(0);
+  svg += '<rect x="60" y="' + ground + '" width="' + (w-80) + '" height="6" fill="#1a3020" rx="1"/>';
+  svg += '<text x="70" y="' + (ground+14) + '" fill="#4a6a5a" font-size="8">Earth Surface</text>';
+
+  /* draw propagation arrows */
+  /* Ground wave */
+  svg += '<path d="M90,' + (ground-2) + ' Q' + (w/2) + ',' + (ground-18) + ' ' + (w-110) + ',' + (ground-2) + '" fill="none" stroke="#ffc833" stroke-width="1.5" stroke-dasharray="4,2"/>';
+  svg += '<text x="' + (w/2) + '" y="' + (ground-20) + '" fill="#ffc833" font-size="8" text-anchor="middle">Ground Wave (LF/MF)</text>';
+
+  /* Sky wave — bouncing off F2 */
+  const f2mid = (scale(500) + scale(250)) / 2;
+  svg += '<path d="M120,' + (ground-3) + ' L' + (w/3) + ',' + (f2mid+10) + ' L' + (w*2/3-50) + ',' + (ground-3) + '" fill="none" stroke="#aaff33" stroke-width="1.5"/>';
+  svg += '<text x="' + (w/3+15) + '" y="' + (f2mid+3) + '" fill="#aaff33" font-size="8">Sky Wave / F2 (HF)</text>';
+
+  /* Line of sight */
+  svg += '<line x1="130" y1="' + (ground-8) + '" x2="270" y2="' + (ground-8) + '" stroke="#33ff88" stroke-width="1.5"/>';
+  svg += '<text x="200" y="' + (ground-12) + '" fill="#33ff88" font-size="8" text-anchor="middle">Line of Sight (VHF/UHF/SHF)</text>';
+
+  svg += '</svg></div>';
+  return svg;
+}
+
+/* ── Propagation modes description ────────────────────────── */
+function buildPropModes() {
+  return '<div class="prop-section"><h3>Propagation Modes</h3>' +
+    '<table class="detail-table">' +
+    row('Ground Wave', 'Signal follows Earth\'s curvature. Dominant below ~2 MHz. Range: 100–3 000 km depending on frequency, power, and ground conductivity. Reliable day and night.') +
+    row('Sky Wave', 'Signal refracted by ionosphere (F-layer) back to Earth. Primary mode for HF (3–30 MHz). Enables intercontinental communication. Strongly affected by time of day, season, and solar cycle.') +
+    row('NVIS', 'Near Vertical Incidence Skywave. Signal sent nearly straight up and reflected down. Covers 0–600 km radius with no skip zone. Best on 2–10 MHz. Used for regional emergency comms.') +
+    row('Line of Sight', 'Direct path; dominant above 30 MHz (VHF and up). Range limited by antenna height and Earth\'s curvature. At 2 m height: ~5 km. At 30 m tower: ~25 km. At FL350 aircraft: ~370 km.') +
+    row('Tropo Ducting', 'Temperature inversion creates atmospheric duct trapping VHF/UHF signals. Extends range to 500+ km over water. Common in coastal and desert regions.') +
+    row('Sporadic E', 'Unpredictable dense ionisation patches at ~100 km altitude. Reflects signals up to ~150 MHz. Duration: minutes to hours. Enables surprise VHF DX to ~2 000 km.') +
+    row('Meteor Scatter', 'Signals reflected off ionised meteor trails at ~80–120 km altitude. Brief bursts (0.5–10 s). Used at 30–100 MHz. Random but predictable rates during annual meteor showers.') +
+    row('EME (Moonbounce)', 'Signals bounced off the Moon\'s surface. Round-trip delay ~2.4 s. Path loss ~250 dB. Requires high power and large antennas. Works at VHF through microwave frequencies.') +
+    '</table></div>';
+}
+
+/* ── Day/Night World Map ──────────────────────────────────── */
+function buildWorldMap() {
+  const w = 680, h = 320;
+  const now = new Date();
+
+  /* calculate subsolar point */
+  const dayOfYear = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
+  const declination = -23.44 * Math.cos(2 * Math.PI / 365 * (dayOfYear + 10));
+  const utcHours = now.getUTCHours() + now.getUTCMinutes() / 60;
+  const subsolarLon = (12 - utcHours) * 15;
+
+  /* simplified world coastline path (Robinson-style, equirectangular for simplicity) */
+  function lonLatToXY(lon, lat) {
+    const x = 40 + (lon + 180) / 360 * (w - 80);
+    const y = 15 + (90 - lat) / 180 * (h - 40);
+    return [x, y];
+  }
+
+  let svg = '<div class="prop-section"><h3>Current Day/Night Terminator — ' +
+    now.toUTCString().replace(/ GMT$/, ' UTC') + '</h3>' +
+    '<div class="world-map-wrap"><svg viewBox="0 0 ' + w + ' ' + h + '">';
+
+  /* background */
+  svg += '<rect x="0" y="0" width="' + w + '" height="' + h + '" fill="#0a0c14" rx="4"/>';
+
+  /* draw grid lines */
+  for (let lon = -180; lon <= 180; lon += 30) {
+    const [x] = lonLatToXY(lon, 0);
+    svg += '<line x1="' + x + '" y1="15" x2="' + x + '" y2="' + (h-25) + '" stroke="#131720" stroke-width="0.5"/>';
+    if (lon % 60 === 0) svg += '<text x="' + x + '" y="' + (h-14) + '" fill="#2a3344" font-size="7" text-anchor="middle">' + (lon >= 0 ? lon + '°E' : (-lon) + '°W') + '</text>';
+  }
+  for (let lat = -60; lat <= 60; lat += 30) {
+    const [, y] = lonLatToXY(0, lat);
+    svg += '<line x1="40" y1="' + y + '" x2="' + (w-40) + '" y2="' + y + '" stroke="#131720" stroke-width="0.5"/>';
+    svg += '<text x="36" y="' + (y+3) + '" fill="#2a3344" font-size="7" text-anchor="end">' + (lat >= 0 ? lat + '°N' : (-lat) + '°S') + '</text>';
+  }
+
+  /* draw night polygon */
+  const nightPoints = [];
+  for (let lon = -180; lon <= 180; lon += 2) {
+    const hourAngle = (lon - subsolarLon) * Math.PI / 180;
+    const decRad = declination * Math.PI / 180;
+    /* terminator latitude: where solar elevation = 0 */
+    const termLat = Math.atan(-Math.cos(hourAngle) / Math.tan(decRad)) * 180 / Math.PI;
+    nightPoints.push({ lon, lat: termLat });
+  }
+
+  /* determine which side is night: check if midnight point is north or south of terminator */
+  const midnightLon = subsolarLon + 180;
+  const testHourAngle = (midnightLon - subsolarLon) * Math.PI / 180;
+  const decRad = declination * Math.PI / 180;
+  const testTermLat = Math.atan(-Math.cos(testHourAngle) / Math.tan(decRad)) * 180 / Math.PI;
+  /* at midnight longitude, the night is above the terminator line if declination > 0 (northern summer) */
+  const nightIsNorth = declination > 0;
+
+  let nightPath = '';
+  if (nightIsNorth) {
+    /* night above terminator */
+    nightPath = 'M' + lonLatToXY(-180, 90).join(',');
+    nightPoints.forEach(p => { const [x,y] = lonLatToXY(p.lon, p.lat); nightPath += ' L' + x + ',' + y; });
+    nightPath += ' L' + lonLatToXY(180, 90).join(',') + ' Z';
+  } else {
+    /* night below terminator */
+    nightPath = 'M' + lonLatToXY(-180, -90).join(',');
+    nightPoints.forEach(p => { const [x,y] = lonLatToXY(p.lon, p.lat); nightPath += ' L' + x + ',' + y; });
+    nightPath += ' L' + lonLatToXY(180, -90).join(',') + ' Z';
+  }
+  svg += '<path d="' + nightPath + '" fill="#000820" opacity="0.5"/>';
+
+  /* draw terminator line */
+  let termPath = 'M';
+  nightPoints.forEach((p, i) => {
+    const [x, y] = lonLatToXY(p.lon, p.lat);
+    termPath += (i === 0 ? '' : ' L') + x + ',' + y;
+  });
+  svg += '<path d="' + termPath + '" fill="none" stroke="#ffaa44" stroke-width="1.5" opacity="0.7"/>';
+
+  /* simplified continent outlines — major land masses as polygons */
+  const continents = [
+    /* North America (simplified) */
+    [[-130,50],[-125,60],[-100,65],[-85,70],[-75,62],[-60,47],[-67,44],[-80,25],[-90,20],[-105,20],[-118,32],[-125,40],[-130,50]],
+    /* South America */
+    [[-80,10],[-65,10],[-35,-5],[-35,-20],[-50,-30],[-55,-35],[-68,-55],[-75,-45],[-70,-20],[-80,-5],[-80,10]],
+    /* Europe */
+    [[-10,36],[0,38],[5,44],[0,48],[-5,48],[5,51],[10,55],[20,55],[30,60],[28,70],[15,70],[5,62],[-10,52],[-10,36]],
+    /* Africa */
+    [[-15,10],[-18,15],[0,36],[10,37],[32,32],[40,12],[50,2],[42,-5],[35,-15],[30,-25],[20,-35],[15,-30],[12,-18],[0,5],[-15,10]],
+    /* Asia (simplified) */
+    [[30,60],[40,42],[50,25],[55,25],[65,20],[75,15],[78,8],[80,12],[88,22],[100,22],[105,10],[110,20],[120,22],[125,35],[130,42],[135,52],[140,55],[135,60],[100,65],[60,70],[30,60]],
+    /* Australia */
+    [[115,-14],[130,-12],[142,-11],[150,-15],[153,-25],[150,-35],[140,-38],[130,-32],[118,-22],[115,-14]],
+  ];
+  continents.forEach(cont => {
+    let p = 'M';
+    cont.forEach((c, i) => {
+      const [x, y] = lonLatToXY(c[0], c[1]);
+      p += (i === 0 ? '' : ' L') + x.toFixed(1) + ',' + y.toFixed(1);
+    });
+    p += ' Z';
+    svg += '<path d="' + p + '" fill="#1a2a1e" stroke="#2a4a2e" stroke-width="0.5" opacity="0.7"/>';
+  });
+
+  /* subsolar point marker */
+  const [sx, sy] = lonLatToXY(subsolarLon, declination);
+  svg += '<circle cx="' + sx + '" cy="' + sy + '" r="4" fill="#ffaa44" opacity="0.8"/>';
+  svg += '<circle cx="' + sx + '" cy="' + sy + '" r="8" fill="none" stroke="#ffaa44" stroke-width="0.5" opacity="0.5"/>';
+  svg += '<text x="' + (sx+10) + '" y="' + (sy+3) + '" fill="#ffaa44" font-size="8">Sub-solar</text>';
+
+  /* labels */
+  svg += '<text x="' + (w/2) + '" y="10" fill="#3e4a5e" font-size="8" text-anchor="middle">Day/Night terminator — shaded area is nighttime (better HF propagation)</text>';
+
+  svg += '</svg></div>';
+
+  /* legend */
+  svg += '<div class="prop-legend">' +
+    '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:#ffaa44"></div>Terminator line</div>' +
+    '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:#000820;border:1px solid #1a2a3a"></div>Nighttime (sky wave active)</div>' +
+    '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:#0a0c14;border:1px solid #1a2a3a"></div>Daytime (D-layer absorbs lower HF)</div>' +
+    '<div class="prop-legend-item"><div class="prop-legend-swatch" style="background:#1a2a1e"></div>Land masses</div>' +
+    '</div>';
+
+  svg += '<p style="font-size:10px;color:#4a5a6e;margin-top:6px">HF propagation on 7–30 MHz improves along nighttime paths where D-layer absorption is absent. ' +
+    'Lower HF (3–7 MHz) works best for NVIS during day and medium-distance sky wave at night. ' +
+    'VHF/UHF propagation is largely unaffected by ionosphere — line-of-sight dominates.</p>';
+
+  svg += '</div>';
+  return svg;
+}
+
+/* ── band vs propagation quick reference ──────────────────── */
+function buildPropBandTable() {
+  return '<div class="prop-section"><h3>Band ↔ Propagation Quick Reference</h3>' +
+    '<table class="detail-table">' +
+    row('VLF (15–30 kHz)', 'Ground wave follows Earth curvature. Penetrates seawater. Global range from single TX with multi-km antenna.') +
+    row('LF (30–300 kHz)', 'Ground wave dominant. Stable 1 000+ km range. Time signals, LORAN, longwave broadcast. Slight sky wave at night.') +
+    row('MF (300 kHz–3 MHz)', 'Ground wave ~100 km by day. Sky wave emerges at night extending range to 1 000+ km. AM broadcast sweet spot.') +
+    row('HF (3–30 MHz)', 'Sky wave via F-layer. Range: intercontinental. Highly dependent on solar cycle, time of day, season. DX at night on lower HF; DX by day on upper HF.') +
+    row('VHF (30–300 MHz)', 'Line of sight. Extended by tropo ducting, sporadic E (rare), meteor scatter, EME. FM broadcast, aviation, amateur 2 m.') +
+    row('UHF (300 MHz–3 GHz)', 'Strictly line of sight. Building penetration varies. Cellular, WiFi, Bluetooth, GPS, satellite, radar. Rain fade negligible.') +
+    row('SHF (3–5 GHz)', 'Line of sight. Needs directional antennas for distance. 5G mid-band, C-band satellite, weather radar. Rain fade begins to be measurable.') +
+    '</table></div>';
 }
 
 /* ── ripple effect on click ──────────────────────────────── */
@@ -556,6 +1028,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
     e.preventDefault();
     const next = e.key === 'ArrowDown' ? Math.min(idx + 1, bands.length - 1) : Math.max(idx - 1, 0);
+    activeSpecial = null;
     selectBand(bands[next]);
   }
 });
