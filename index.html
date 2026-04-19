@@ -1876,7 +1876,7 @@ function buildAtmoDiagram() {
   /* draw propagation arrows */
   /* Sky wave — bouncing off F2 (draw first, behind other elements) */
   const f2mid = (scale(500) + scale(250)) / 2;
-  const skyX1 = 160, skyPeakX = w/3 + 10, skyX2 = w*2/3 - 30;
+  const skyX1 = 220, skyPeakX = w/3 + 40, skyX2 = w/2 + 40;
   svg += '<path d="M' + skyX1 + ',' + (ground-3) + ' L' + skyPeakX + ',' + (f2mid+10) + ' L' + skyX2 + ',' + (ground-3) + '" fill="none" stroke="' + (lt?'#669900':'#aaff33') + '" stroke-width="2"/>';
   svg += '<text x="' + (skyPeakX+15) + '" y="' + (f2mid-2) + '" fill="' + (lt?'#669900':'#aaff33') + '" font-size="11" font-weight="500">Sky Wave / F2 (HF)</text>';
 
@@ -1884,11 +1884,11 @@ function buildAtmoDiagram() {
   const losY = ground - 12;
   svg += '<line x1="' + skyX1 + '" y1="' + losY + '" x2="' + ((skyX1 + skyX2)/2) + '" y2="' + losY + '" stroke="' + (lt?'#00884a':'#33ff88') + '" stroke-width="2"/>';
   /* Label above the green LoS line */
-  const losMidX = (skyX1 + (skyX1 + skyX2)/2) / 2 + 80;
+  const losMidX = (skyX1 + (skyX1 + skyX2)/2) / 2 + 60;
   svg += '<text x="' + losMidX + '" y="' + (losY - 18) + '" fill="' + (lt?'#00884a':'#33ff88') + '" font-size="11" font-weight="500" text-anchor="middle">Line of Sight (VHF/UHF/SHF)</text>';
 
   /* Ground wave — curved line along surface */
-  svg += '<path d="M100,' + (ground-2) + ' Q' + (w/3) + ',' + (ground-30) + ' ' + (w-300) + ',' + (ground-2) + '" fill="none" stroke="' + (lt?'#aa8800':'#ffc833') + '" stroke-width="2" stroke-dasharray="4,2"/>';
+  svg += '<path d="M' + (skyX1 - 40) + ',' + (ground-2) + ' Q' + ((skyX1 + skyX2)/2) + ',' + (ground-30) + ' ' + (skyX2 + 40) + ',' + (ground-2) + '" fill="none" stroke="' + (lt?'#aa8800':'#ffc833') + '" stroke-width="2" stroke-dasharray="4,2"/>';
   /* Label at Earth Surface level */
   svg += '<text x="' + (w/3) + '" y="' + (ground + 20) + '" fill="' + (lt?'#aa8800':'#ffc833') + '" font-size="11" font-weight="500" text-anchor="middle">Ground Wave (LF/MF)</text>';
 
