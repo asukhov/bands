@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1963,9 +1963,9 @@ function buildSkipDiagram() {
   s += '<path d="M0,' + ionoBotY + ' Q' + (w/2) + ',' + (ionoBotY + 20) + ' ' + w + ',' + ionoBotY + ' L' + w + ',' + ionoTopY + ' Q' + (w/2) + ',' + (ionoTopY + 12) + ' 0,' + ionoTopY + ' Z" fill="url(#ionoHatch)"/>';
   s += '<text x="' + (w - 20) + '" y="' + ((ionoTopY + ionoBotY) / 2 + 4) + '" fill="' + ionoTxt + '" font-size="12" font-weight="600" text-anchor="end">IONOSPHERE</text>';
 
-  /* earth surface — gentle curve */
-  s += '<path d="M0,' + earthY + ' Q' + (w/2) + ',' + (earthY + 12) + ' ' + w + ',' + earthY + ' L' + w + ',' + h + ' L0,' + h + ' Z" fill="' + ground + '" opacity="0.5"/>';
-  s += '<path d="M0,' + earthY + ' Q' + (w/2) + ',' + (earthY + 12) + ' ' + w + ',' + earthY + '" fill="none" stroke="' + groundTx + '" stroke-width="1.5"/>';
+  /* earth surface — gentle upward curve to indicate Earth curvature */
+  s += '<path d="M0,' + earthY + ' Q' + (w/2) + ',' + (earthY - 18) + ' ' + w + ',' + earthY + ' L' + w + ',' + h + ' L0,' + h + ' Z" fill="' + ground + '" opacity="0.5"/>';
+  s += '<path d="M0,' + earthY + ' Q' + (w/2) + ',' + (earthY - 18) + ' ' + w + ',' + earthY + '" fill="none" stroke="' + groundTx + '" stroke-width="1.5"/>';
 
   /* transmitter tower */
   var tb = earthY;
@@ -2004,8 +2004,6 @@ function buildSkipDiagram() {
   var skyBounceX = (towerX + skipEndX) / 2 + 30;
   var skyBounceY = ionoBotY + 10;
   s += '<path d="M' + towerX + ',' + (towerTop - 10) + ' L' + skyBounceX + ',' + skyBounceY + ' L' + skipEndX + ',' + (earthY - 2) + '" fill="none" stroke="' + skyClr + '" stroke-width="2.5"/>';
-  /* arrowhead at landing point */
-  s += '<polygon points="' + skipEndX + ',' + (earthY - 2) + ' ' + (skipEndX - 12) + ',' + (earthY - 14) + ' ' + (skipEndX - 5) + ',' + (earthY - 10) + '" fill="' + skyClr + '"/>';
   /* label along upper leg */
   var skyLabelX = (towerX + skyBounceX) / 2 - 10;
   var skyLabelY = (towerTop - 10 + skyBounceY) / 2 - 6;
@@ -2162,7 +2160,7 @@ function buildWorldMap() {
     var c = lonLatToXY(p.lon, p.lat);
     termPath += (i === 0 ? '' : ' L') + c[0] + ',' + c[1];
   });
-  svg += '<path d="' + termPath + '" fill="none" stroke="' + (lt?'#cc7700':'#ffaa44') + '" stroke-width="1.5" opacity="0.8"/>';
+  /* terminator drawn after continents so it renders on top */
 
   /* ── Continent outlines (Natural Earth 110m) ── */
   const continents = [
@@ -2272,6 +2270,9 @@ function buildWorldMap() {
     p += ' Z';
     svg += '<path d="' + p + '" fill="' + (lt?'#8ab88a':'#1a2e1e') + '" stroke="' + (lt?'#5a905a':'#2e4e32') + '" stroke-width="0.8" opacity="0.8"/>';
   });
+
+  /* ── Terminator line (on top of continents) ── */
+  svg += '<path d="' + termPath + '" fill="none" stroke="' + (lt?'#cc7700':'#ffaa44') + '" stroke-width="1.5" opacity="0.8"/>';
 
   /* ── Subsolar point marker ── */
   const [sx, sy] = lonLatToXY(subsolarLon, declination);
